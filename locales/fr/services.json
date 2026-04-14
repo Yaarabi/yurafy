@@ -1,0 +1,222 @@
+{
+  "services": {
+    "hero": {
+      "title": "Des solutions web qui propulsent votre entreprise avec la technologie moderne",
+      "subtitle": "Nous concevons et développons des solutions numériques performantes et évolutives, adaptées à vos objectifs",
+      "ctaPrimary": "Obtenez votre site maintenant",
+      "ctaSecondary": "Discutez avec nous sur WhatsApp"
+    },
+    "techStack": {
+      "label": "Technologies & Plateformes avec lesquelles nous travaillons"
+    },
+    "web": {
+      "title": "Notre Expertise",
+      "subtitle": "Des solutions web qui propulsent votre entreprise",
+      "description": "Des sites CMS aux boutiques e-commerce performantes et aux applications web sur mesure.",
+      "items": {
+        "wordpress": {
+          "title": "WordPress & CMS",
+          "description": "Thèmes WordPress personnalisés, plugins et solutions CMS conçus pour la vitesse, l'évolutivité et l'image de marque."
+        },
+        "ecommerce": {
+          "title": "Développement E-Commerce",
+          "description": "Boutiques Shopify, YouCan et WooCommerce conçues pour augmenter les conversions et optimiser les flux de vente."
+        },
+        "uiux": {
+          "title": "Design UI/UX",
+          "description": "Interfaces centrées sur l'utilisateur avec une esthétique moderne qui transforment les visiteurs en clients fidèles."
+        },
+        "responsive": {
+          "title": "Responsive & Mobile-First",
+          "description": "Expérience fluide sur tous les appareils avec des mises en page responsives et un design tactile."
+        },
+        "customWebApps": {
+          "title": "Applications Web Sur Mesure",
+          "description": "Applications sur mesure construites avec MERN, Next.js, Nest.js et d'autres technologies modernes adaptées à vos besoins."
+        },
+        "performanceSeo": {
+          "title": "Performance & SEO",
+          "description": "Sites web optimisés avec des temps de chargement rapides, des données structurées et les meilleures pratiques SEO."
+        }
+      }
+    },
+    "customWebsite": {
+      "type": "Site Web Sur Mesure",
+      "description": "Conception et développement de sites web personnalisés selon votre marque.",
+      "features": {
+        "design": "Design & branding personnalisés",
+        "development": "Développement & intégrations sur mesure"
+      }
+    },
+    "wordpressWebsite": {
+      "type": "Site WordPress",
+      "description": "Thèmes, plugins et solutions CMS WordPress personnalisés.",
+      "features": {
+        "themes": "Thèmes personnalisés",
+        "plugins": "Développement & intégration de plugins"
+      }
+    },
+    "shopifyStore": {
+      "type": "Boutique Shopify",
+      "description": "Configuration Shopify, personnalisation de thème et intégrations d'applications.",
+      "features": {
+        "setup": "Configuration & personnalisation de la boutique",
+        "integration": "Applications tierces & paiements"
+      }
+    },
+    "cta": {
+      "badge": "Disponible maintenant",
+      "title": "Prêt à lancer votre projet ?",
+      "subtitle": "Contactez-nous aujourd'hui pour une consultation gratuite et construisons ensemble quelque chose d'exceptionnel.",
+      "button": "Demander un devis",
+      "whatsapp": "Discuter sur WhatsApp",
+      "whatsappText": "Bonjour, j'aimerais discuter d'un projet web avec Yurafy."
+    },
+    "form": {
+      "title": "Demander un devis",
+      "fullName": "Nom complet",
+      "fullNamePlaceholder": "Entrez votre nom complet",
+      "phoneNumber": "Numéro de téléphone",
+      "email": "Adresse e-mail",
+      "serviceType": "Type de service",
+      "selectService": "Sélectionnez un service",
+      "message": "Détails supplémentaires",
+      "optional": "Optionnel",
+      "messagePlaceholder": "Décrivez les besoins de votre projet...",
+      "domainOfWork": "Domaine d'activité",
+      "domainOfWorkPlaceholder": "ex. E-commerce, Restaurant, Électronique",
+      "otherOption": "Autre",
+      "submit": "Envoyer la demande",
+      "submitting": "Envoi en cours...",
+      "cancel": "Annuler",
+      "success": "Merci ! Votre demande a été envoyée avec succès. Nous vous contacterons bientôt.",
+      "errors": {
+        "fullName": "Veuillez entrer un nom valide (au moins 2 caractères)",
+        "phoneNumber": "Veuillez entrer un numéro de téléphone",
+        "email": "Veuillez entrer une adresse e-mail valide",
+        "serviceType": "Veuillez sélectionner un type de service",
+        "domainOfWorkRequired": "Veuillez entrer le domaine d'activité (requis pour Autre)",
+        "domainOfWorkMax": "Le domaine d'activité ne doit pas dépasser 100 caractères",
+        "messageRequired": "Veuillez fournir plus de détails (requis pour Autre)",
+        "validation": "Veuillez corriger les erreurs dans le formulaire",
+        "submit": "Échec de l'envoi. Veuillez réessayer."
+      }
+    },
+    "projectsTitle": "Nos projets récents",
+    "projectsSubtitle": "Une sélection de projets récents de développement web.",
+    "projectsEmpty": "Aucun projet pour le moment. Revenez bientôt.",
+    "projectsView": "Voir le projet",
+    "faq": {
+      "title": "Questions fréquentes",
+      "items": {
+        "q1": { "q": "Combien de temps prend un projet web typique ?", "a": "Les délais varient, mais un site de petite à moyenne taille prend généralement 2 à 6 semaines selon la portée." },
+        "q2": { "q": "Proposez-vous l'hébergement et la maintenance ?", "a": "Oui — nous proposons des plans d'hébergement, de maintenance et de support continu adaptés à vos besoins." },
+        "q3": { "q": "Pouvez-vous migrer mon site existant ?", "a": "Absolument — nous pouvons migrer le contenu, le design et les données depuis la plupart des plateformes avec un temps d'arrêt minimal." },
+        "q4": { "q": "Quelles technologies et plateformes utilisez-vous ?", "a": "Nous construisons avec des technologies web modernes comme Next.js, React, TypeScript, Node et NestJS ; et nous travaillons avec des plateformes telles que Shopify, YouCan et WordPress. Nous utilisons également Tailwind CSS, MongoDB, PostgreSQL, Supabase et d'autres outils adaptés à votre projet." }
+      }
+    },
+    "whyChooseUs": {
+      "badge": "Pourquoi Yurafy",
+      "title": "Pourquoi les entreprises nous choisissent",
+      "subtitle": "Nous ne construisons pas seulement des sites web — nous créons des moteurs de croissance numérique adaptés à votre marché.",
+      "stats": {
+        "projects": "Projets livrés",
+        "languages": "Langues supportées",
+        "satisfaction": "Satisfaction client",
+        "response": "Temps de réponse moyen"
+      },
+      "items": {
+        "quality": {
+          "title": "Code de qualité premium",
+          "description": "Architecture propre et évolutive, construite avec les meilleures pratiques modernes et des standards de qualité rigoureux."
+        },
+        "fast": {
+          "title": "Livraison rapide",
+          "description": "Des flux de travail efficaces et des délais clairs pour que votre projet soit lancé dans les temps."
+        },
+        "support": {
+          "title": "Support dédié",
+          "description": "Support post-lancement et plans de maintenance pour que votre site fonctionne parfaitement."
+        },
+        "global": {
+          "title": "Prêt pour plusieurs langues",
+          "description": "Anglais, français et arabe — nous construisons pour tout le Maroc et au-delà."
+        },
+        "ontime": {
+          "title": "Livraison dans les délais",
+          "description": "Nous respectons vos délais. Notre processus est structuré pour livrer sans retard."
+        },
+        "trusted": {
+          "title": "Approuvé par nos clients",
+          "description": "Des relations durables fondées sur la transparence, l'honnêteté et des résultats mesurables."
+        }
+      }
+    },
+    "process": {
+      "badge": "Notre approche",
+      "title": "Notre processus, étape par étape",
+      "subtitle": "Un flux de travail transparent et structuré qui vous tient informé à chaque étape.",
+      "note": "Chaque projet commence par une consultation gratuite — sans engagement.",
+      "steps": {
+        "step1": {
+          "title": "Appel de découverte",
+          "description": "Nous apprenons vos objectifs, votre audience et vos besoins."
+        },
+        "step2": {
+          "title": "Proposition & périmètre",
+          "description": "Devis clair, délai et livrables — sans surprises."
+        },
+        "step3": {
+          "title": "Design & développement",
+          "description": "Développement complet avec des mises à jour régulières."
+        },
+        "step4": {
+          "title": "Lancement",
+          "description": "Déploiement, tests et mise en ligne avec votre approbation."
+        },
+        "step5": {
+          "title": "Support",
+          "description": "Maintenance continue, mises à jour et accompagnement pour votre croissance."
+        }
+      }
+    },
+    "differentIdea": {
+      "badge": "Idée différente 💡",
+      "title": "Vous voulez quelque chose de différent ?",
+      "description": "Vous ne trouvez pas exactement ce dont vous avez besoin ? Parlez-nous d'une application ou fonctionnalité personnalisée et nous la construirons pour vous.",
+      "cta": "Partagez votre idée"
+    }
+  },
+  "Footer": {
+    "companyName": "Yurafy",
+    "companyDescription": "Donner aux entreprises les moyens de réussir grâce aux solutions web modernes. Concevez, développez et faites croître votre présence numérique.",
+    "navigation": {
+      "title": "Navigation",
+      "home": "Accueil",
+      "products": "Produits",
+      "pricing": "Tarifs",
+      "about": "À propos"
+    },
+    "resources": {
+      "title": "Ressources",
+      "resources": "Ressources",
+      "blog": "Blog",
+      "support": "Support",
+      "terms": "Conditions & Confidentialité",
+      "services": "Services"
+    },
+    "contact": {
+      "title": "Nous contacter"
+    },
+    "copyright": "© 2025 Yurafy. Tous droits réservés."
+  },
+  "Support": {
+    "chat": {
+      "title": "Chat de support",
+      "input": {
+        "placeholder": "Écrivez votre message...",
+        "send": "Envoyer"
+      }
+    }
+  }
+}

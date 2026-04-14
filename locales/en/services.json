@@ -1,0 +1,222 @@
+{
+  "services": {
+    "hero": {
+      "title": "Web solutions that drive your business forward with Modern Technology",
+      "subtitle": "We design and develop scalable, high-performance digital solutions tailored to your goals",
+      "ctaPrimary": "Get Your Website Now",
+      "ctaSecondary": "Chat with Us on WhatsApp"
+    },
+    "techStack": {
+      "label": "Technologies & Platforms We Work With"
+    },
+    "web": {
+      "title": "Our Expertise",
+      "subtitle": "Web solutions that drive your business forward",
+      "description": "From CMS websites to high-converting e-commerce stores and custom web apps.",
+      "items": {
+        "wordpress": {
+          "title": "WordPress & CMS",
+          "description": "Custom WordPress themes, plugins, and CMS solutions designed for speed, scalability, and brand alignment."
+        },
+        "ecommerce": {
+          "title": "E-Commerce Development",
+          "description": "Shopify, YouCan, and WooCommerce stores built to increase conversions and streamline sales workflows."
+        },
+        "uiux": {
+          "title": "UI/UX Design",
+          "description": "User-centered interfaces with modern aesthetics that turn visitors into loyal customers."
+        },
+        "responsive": {
+          "title": "Responsive & Mobile-First",
+          "description": "Seamless experience on all devices with responsive layouts, progressive enhancements, and touch-friendly design."
+        },
+        "customWebApps": {
+          "title": "Custom Web Applications",
+          "description": "Bespoke applications built with MERN, Next.js, Nest.js, and other modern technologies tailored to your business needs."
+        },
+        "performanceSeo": {
+          "title": "Performance & SEO",
+          "description": "Optimized websites with fast load times, structured data, and best practices to boost search rankings and retention."
+        }
+      }
+    },
+    "customWebsite": {
+      "type": "Custom Website",
+      "description": "Bespoke website design and development tailored to your brand.",
+      "features": {
+        "design": "Custom design & branding",
+        "development": "Custom development & integrations"
+      }
+    },
+    "wordpressWebsite": {
+      "type": "WordPress Website",
+      "description": "Custom WordPress themes, plugins and CMS solutions.",
+      "features": {
+        "themes": "Custom themes",
+        "plugins": "Plugin development & integration"
+      }
+    },
+    "shopifyStore": {
+      "type": "Shopify Store",
+      "description": "Shopify setup, theme customization and app integrations.",
+      "features": {
+        "setup": "Store setup & theme customization",
+        "integration": "Third-party apps & payments"
+      }
+    },
+    "cta": {
+      "badge": "Available Now",
+      "title": "Ready to Start Your Project?",
+      "subtitle": "Contact us today for a free consultation and let's build something great together.",
+      "button": "Request a Quote",
+      "whatsapp": "Chat on WhatsApp",
+      "whatsappText": "Hi, I'd like to discuss a web project with Yurafy."
+    },
+    "form": {
+      "title": "Request a Quote",
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "Enter your full name",
+      "phoneNumber": "Phone Number",
+      "email": "Email Address",
+      "serviceType": "Service Type",
+      "selectService": "Select a service",
+      "message": "Additional Details",
+      "optional": "Optional",
+      "messagePlaceholder": "Tell us about your project requirements...",
+      "domainOfWork": "Domain of Work",
+      "domainOfWorkPlaceholder": "e.g., E-commerce, Restaurant, Electronics",
+      "otherOption": "Other",
+      "submit": "Submit Request",
+      "submitting": "Submitting...",
+      "cancel": "Cancel",
+      "success": "Thank you! Your request has been submitted successfully. We will contact you soon.",
+      "errors": {
+        "fullName": "Please enter a valid full name (at least 2 characters)",
+        "phoneNumber": "Please enter a phone number",
+        "email": "Please enter a valid email address",
+        "serviceType": "Please select a service type",
+        "domainOfWorkRequired": "Please enter the domain of work (required for Other)",
+        "domainOfWorkMax": "Domain of work must not exceed 100 characters",
+        "messageRequired": "Please provide more details (required for Other)",
+        "validation": "Please fix the errors in the form",
+        "submit": "Failed to submit request. Please try again."
+      }
+    },
+    "projectsTitle": "Our Recent Projects",
+    "projectsSubtitle": "A selection of recent web development projects and case studies.",
+    "projectsEmpty": "No projects yet. Check back soon.",
+    "projectsView": "View project",
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "items": {
+        "q1": { "q": "How long does a typical website project take?", "a": "Project timelines vary, but typical small-to-medium websites take 2-6 weeks depending on scope." },
+        "q2": { "q": "Do you provide hosting and maintenance?", "a": "Yes — we offer hosting, maintenance, and ongoing support plans tailored to your needs." },
+        "q3": { "q": "Can you migrate my existing website?", "a": "Absolutely — we can migrate content, design, and data from most platforms with minimal downtime." },
+        "q4": { "q": "What technologies and platforms do you use?", "a": "We build with modern web technologies like Next.js, React, TypeScript, Node, and NestJS; and we work with platforms such as Shopify, YouCan, and WordPress. We also use Tailwind CSS, MongoDB, PostgreSQL, Supabase, and other tools tailored to your project needs." }
+      }
+    },
+    "whyChooseUs": {
+      "badge": "Why Yurafy",
+      "title": "Why Businesses Choose Us",
+      "subtitle": "We don't just build websites — we build digital growth engines tailored to your market.",
+      "stats": {
+        "projects": "Projects Delivered",
+        "languages": "Languages Supported",
+        "satisfaction": "Client Satisfaction",
+        "response": "Avg. Response Time"
+      },
+      "items": {
+        "quality": {
+          "title": "Premium Quality Code",
+          "description": "Clean, scalable architecture built with modern best practices and rigorous quality standards."
+        },
+        "fast": {
+          "title": "Fast Delivery",
+          "description": "Efficient workflows and clear timelines so your project launches on schedule."
+        },
+        "support": {
+          "title": "Dedicated Support",
+          "description": "Post-launch support and maintenance plans to keep your site running perfectly."
+        },
+        "global": {
+          "title": "Multilingual Ready",
+          "description": "English, French & Arabic — we build for all of Morocco and beyond."
+        },
+        "ontime": {
+          "title": "On-Time Delivery",
+          "description": "We respect your deadlines. Our process is structured to deliver without delays."
+        },
+        "trusted": {
+          "title": "Trusted by Clients",
+          "description": "Long-term relationships built on transparency, honesty, and measurable results."
+        }
+      }
+    },
+    "process": {
+      "badge": "How We Work",
+      "title": "Our Process, Step by Step",
+      "subtitle": "A transparent, structured workflow that keeps you informed at every stage.",
+      "note": "Every project starts with a free consultation — no commitment required.",
+      "steps": {
+        "step1": {
+          "title": "Discovery Call",
+          "description": "We learn about your goals, audience, and requirements."
+        },
+        "step2": {
+          "title": "Proposal & Scope",
+          "description": "Clear quote, timeline, and deliverables — no surprises."
+        },
+        "step3": {
+          "title": "Design & Build",
+          "description": "Full development with regular progress updates."
+        },
+        "step4": {
+          "title": "Launch",
+          "description": "Deployment, testing, and go-live with your approval."
+        },
+        "step5": {
+          "title": "Support",
+          "description": "Ongoing maintenance, updates, and growth support."
+        }
+      }
+    },
+    "differentIdea": {
+      "badge": "Different Idea 💡",
+      "title": "Want something different?",
+      "description": "Don't see exactly what you need? Tell us about a custom app or feature and we'll build it for you.",
+      "cta": "Tell us your idea"
+    }
+  },
+  "Footer": {
+    "companyName": "Yurafy",
+    "companyDescription": "Empowering businesses with modern web solutions. Design, develop, and grow your digital presence effortlessly.",
+    "navigation": {
+      "title": "Navigation",
+      "home": "Home",
+      "products": "Products",
+      "pricing": "Pricing",
+      "about": "About"
+    },
+    "resources": {
+      "title": "Resources",
+      "resources": "Resources",
+      "blog": "Blog",
+      "support": "Support",
+      "terms": "Terms & Privacy",
+      "services": "Services"
+    },
+    "contact": {
+      "title": "Contact Us"
+    },
+    "copyright": "© 2025 Yurafy. All rights reserved."
+  },
+  "Support": {
+    "chat": {
+      "title": "Support Chat",
+      "input": {
+        "placeholder": "Type your message...",
+        "send": "Send"
+      }
+    }
+  }
+}
