@@ -19,10 +19,12 @@ function StepCard({
     index,
     isLast,
     isRTL,
+    className = "",
 }: {
     index: number;
     isLast: boolean;
     isRTL: boolean;
+    className?: string;
 }) {
     const t = useTranslations("services.process");
     const Icon = stepIcons[index];
@@ -47,7 +49,7 @@ function StepCard({
     }, []);
 
     return (
-        <div className="flex-1 relative flex flex-col items-center">
+        <div className={`flex-1 relative flex flex-col items-center ${className}`}>
             {/* Connector line */}
             {!isLast && (
                 <div
@@ -143,9 +145,15 @@ export default function ProcessSection() {
                 </div>
 
                 {/* Steps */}
-                <div className={`flex flex-col lg:flex-row gap-10 lg:gap-0 items-start ${isRTL ? "lg:flex-row-reverse" : ""}`}>
+                <div className={`grid grid-cols-2 lg:flex lg:flex-row gap-y-12 gap-x-4 lg:gap-0 items-start ${isRTL ? "lg:flex-row-reverse" : ""}`}>
                     {[0, 1, 2, 3, 4].map((i) => (
-                        <StepCard key={i} index={i} isLast={i === 4} isRTL={isRTL} />
+                        <StepCard 
+                            key={i} 
+                            index={i} 
+                            isLast={i === 4} 
+                            isRTL={isRTL} 
+                            className={i === 4 ? "col-span-2" : ""}
+                        />
                     ))}
                 </div>
 

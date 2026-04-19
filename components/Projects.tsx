@@ -41,7 +41,7 @@ export default function Projects({ locale, initialProjects }: { locale: string; 
         async function load() {
             try {
                 setLoading(true);
-                const res = await fetch("/api/projects", { cache: "no-store" });
+                const res = await fetch("https://yurafy.com/api/projects", { cache: "no-store" });
                 if (!res.ok) throw new Error("Failed to load projects");
                 const data = await res.json();
                 if (!cancelled) setProjects(data.projects || []);

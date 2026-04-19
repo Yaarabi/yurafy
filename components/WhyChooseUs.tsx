@@ -2,7 +2,9 @@
 
 import { useRef, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
-import { ShieldCheck, Rocket, HeartHandshake, Globe2, Clock, Star } from "lucide-react";
+import { ShieldCheck, Rocket, HeartHandshake, Globe2, Clock, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, useMotionValue, useTransform, animate, useInView } from "framer-motion";
+import { useState } from "react";
 
 const icons = [ShieldCheck, Rocket, HeartHandshake, Globe2, Clock, Star];
 
@@ -15,6 +17,28 @@ const accentColors = [
     { color: "#1E67C6", bg: "rgba(30,103,198,0.12)", border: "rgba(30,103,198,0.25)" },
     { color: "#13FFAA", bg: "rgba(19,255,170,0.10)", border: "rgba(19,255,170,0.22)" },
 ];
+function StatCounter({ value, color }: { value: string; color: string }) {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true, margin: "-100px" });
+    const count = useMotionValue(0);
+    const rounded = useTransform(count, (latest) => Math.round(latest));
+
+    useEffect(() => {
+        if (isInView) {
+            const numericValue = parseInt(value.replace(/[^0-9]/g, "")) || 0;
+            animate(count, numericValue, { duration: 2, ease: "easeOut" });
+        }
+    }, [isInView, value, count]);
+
+    const suffix = value.replace(/[0-9]/g, "");
+
+    return (
+        <span ref={ref} className="text-3xl font-extrabold" style={{ color }}>
+            <motion.span>{rounded}</motion.span>
+            {suffix}
+        </span>
+    );
+}
 
 function ReasonCard({
     index,
@@ -52,7 +76,7 @@ function ReasonCard({
     return (
         <div
             ref={ref}
-            className={`group flex gap-4 p-5 rounded-2xl cursor-default ${isRTL ? "flex-row-reverse text-right" : ""}`}
+            className={`group flex flex-col items-center gap-4 p-6 rounded-2xl cursor-default text-center h-full w-full`}
             style={{
                 opacity: 0,
                 transform: "translateY(24px)",
@@ -111,7 +135,34 @@ export default function WhyChooseUs() {
     const t = useTranslations("services.whyChooseUs");
     const locale = useLocale();
     const isRTL = locale === "ar";
+    
     const statsRef = useRef<HTMLDivElement>(null);
+    const scrollRef = useRef<HTMLDivElement>(null);
+    
+    const [canScrollLeft, setCanScrollLeft] = useState(false);
+    const [canScrollRight, setCanScrollRight] = useState(true);
+
+    const checkScroll = () => {
+        if (scrollRef.current) {
+            const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+            setCanScrollLeft(scrollLeft > 10);
+            setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+        }
+    };
+
+    const scroll = (direction: "left" | "right") => {
+        if (scrollRef.current) {
+            const { clientWidth } = scrollRef.current;
+            const scrollAmount = direction === "left" ? -clientWidth : clientWidth;
+            scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+        }
+    };
+
+    useEffect(() => {
+        checkScroll();
+        window.addEventListener("resize", checkScroll);
+        return () => window.removeEventListener("resize", checkScroll);
+    }, []);
 
     useEffect(() => {
         const el = statsRef.current;
@@ -195,25 +246,72 @@ export default function WhyChooseUs() {
                                 transition: "opacity 0.4s ease, transform 0.4s ease",
                             }}
                         >
-                            <p className="text-3xl font-extrabold" style={{ color: stat.color }}>
-                                {stat.value}
-                            </p>
+                            <StatCounter value={stat.value} color={stat.color} />
                             <p className="text-xs text-white/40 mt-1 font-medium">{t(stat.labelKey)}</p>
                         </div>
                     ))}
                 </div>
 
-                {/* Reasons grid */}
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                    {reasons.map((reason, i) => (
-                        <ReasonCard
-                            key={i}
-                            index={i}
-                            titleKey={reason.titleKey}
-                            descKey={reason.descKey}
-                            isRTL={isRTL}
-                        />
-                    ))}
+                {/* Reasons Slider */}
+                <div className="relative group/slider px-2">
+                    <div
+                        ref={scrollRef}
+                        onScroll={checkScroll}
+                        className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory pb-8"
+                        style={{
+                            scrollbarWidth: "none",
+                            msOverflowStyle: "none",
+                        }}
+                    >
+                        {reasons.map((reason, i) => (
+                            <div 
+                                key={i} 
+                                className="shrink-0 w-full sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)] snap-center pt-4 flex"
+                            >
+                                <ReasonCard
+                                    index={i}
+                                    titleKey={reason.titleKey}
+                                    descKey={reason.descKey}
+                                    isRTL={isRTL}
+                                />
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Navigation Arrows - Bottom Center */}
+                    <div className="flex justify-center gap-5 mt-4 z-20">
+                        <button
+                            onClick={() => scroll("left")}
+                            disabled={!canScrollLeft}
+                            className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${
+                                canScrollLeft 
+                                ? "border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/40 shadow-lg shadow-white/5" 
+                                : "border-white/5 bg-transparent text-white/20 cursor-not-allowed"
+                            }`}
+                            aria-label="Previous reason"
+                        >
+                            {isRTL ? <ChevronRight className="w-6 h-6" /> : <ChevronLeft className="w-6 h-6" />}
+                        </button>
+                        <button
+                            onClick={() => scroll("right")}
+                            disabled={!canScrollRight}
+                            className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${
+                                canScrollRight 
+                                ? "border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/40 shadow-lg shadow-white/5" 
+                                : "border-white/5 bg-transparent text-white/20 cursor-not-allowed"
+                            }`}
+                            aria-label="Next reason"
+                        >
+                            {isRTL ? <ChevronLeft className="w-6 h-6" /> : <ChevronRight className="w-6 h-6" />}
+                        </button>
+                    </div>
+
+                    {/* Custom Scrollbar CSS */}
+                    <style jsx global>{`
+                        .no-scrollbar::-webkit-scrollbar {
+                            display: none;
+                        }
+                    `}</style>
                 </div>
             </div>
         </section>

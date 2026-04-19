@@ -185,6 +185,14 @@
       "title": "Vous voulez quelque chose de différent ?",
       "description": "Vous ne trouvez pas exactement ce dont vous avez besoin ? Parlez-nous d'une application ou fonctionnalité personnalisée et nous la construirons pour vous.",
       "cta": "Partagez votre idée"
+    },
+    "founder": {
+      "badge": "Excellence Technique",
+      "title": "Travaillez directement avec l'expert qui bâtit votre projet",
+      "name": "Youssef Aarabi",
+      "role": "Développeur Full-Stack & Fondateur de Yurafy",
+      "bio": "Je ne me contente pas de créer des sites ; je conçois des applications web haute performance, des plateformes SaaS et des systèmes numériques sur mesure axés sur la scalabilité technique. En choisissant Yurafy, vous collaborez directement avec moi pour transformer vos besoins complexes en produits rapides, fiables et générant des résultats concrets.",
+      "cta": "Discuter de votre projet avec moi"
     }
   },
   "Footer": {

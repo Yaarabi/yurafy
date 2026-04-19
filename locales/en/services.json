@@ -185,6 +185,14 @@
       "title": "Want something different?",
       "description": "Don't see exactly what you need? Tell us about a custom app or feature and we'll build it for you.",
       "cta": "Tell us your idea"
+    },
+    "founder": {
+      "badge": "Engineering Excellence",
+      "title": "Work Directly with the Person Building Your Project",
+      "name": "Youssef Aarabi",
+      "role": "Full-Stack Developer & Founder of Yurafy",
+      "bio": "I don't just build websites; I engineer high-performance web applications, SaaS platforms, and custom digital systems designed for technical scalability. When you partner with Yurafy, you work directly with me to transform complex business requirements into fast, reliable products that deliver measurable results.",
+      "cta": "Discuss Your Project Directly"
     }
   },
   "Footer": {

@@ -13,6 +13,7 @@ import ServicesCTA from '@/components/ServicesCTA';
 import DifferentIdea from '@/components/DifferentIdea';
 import ServicesFAQ from '@/components/ServicesFAQ';
 import Footer from '@/components/Footer';
+import FounderSection from '@/components/FounderSection';
 import SupportChat from '@/components/SupportChat';
 import ServiceForm from '@/components/ServiceForm';
 
@@ -55,7 +56,10 @@ export default function HomePage() {
       {/* 6 — Recent projects gallery */}
       <Projects locale={locale} />
 
-      {/* 7 — CTA banner */}
+      {/* 7 — Founder Section */}
+      <FounderSection onRequestQuote={() => openForm()} />
+
+      {/* 8 — CTA banner */}
       <ServicesCTA onRequestQuote={() => openForm()} />
 
       {/* 8 — Custom/different idea prompt */}

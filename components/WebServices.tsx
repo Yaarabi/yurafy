@@ -2,12 +2,13 @@
 
 import React, { useRef, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
-import { ShoppingBag, Layout, Globe, Smartphone, Code2, Zap } from "lucide-react";
+import { ShoppingBag, Layout, Globe, Smartphone, Code2, Zap, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
 
 interface ServiceItem {
     id: string;
     key: string;
-    icon: React.ComponentType<{ className?: string }>;
+    icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
     accent: string;
     glow: string;
 }
@@ -47,7 +48,7 @@ function ServiceCard({ service, index, isRTL }: { service: ServiceItem; index: n
     return (
         <div
             ref={ref}
-            className="group relative rounded-3xl p-7 flex flex-col gap-5 cursor-default transition-all duration-300"
+            className="group relative rounded-3xl p-7 flex flex-col items-center gap-5 cursor-default transition-all duration-300 text-center h-full w-full"
             style={{
                 opacity: 0,
                 transform: "translateY(28px)",
@@ -83,7 +84,7 @@ function ServiceCard({ service, index, isRTL }: { service: ServiceItem; index: n
             </div>
 
             {/* Text */}
-            <div className={isRTL ? "text-right" : "text-left"}>
+            <div>
                 <h3 className="text-base font-bold text-white mb-2 leading-snug">
                     {t(`web.items.${service.key}.title`)}
                 </h3>
@@ -99,6 +100,33 @@ const Services: React.FC = () => {
     const t = useTranslations("services");
     const locale = useLocale();
     const isRTL = locale === "ar";
+    
+    const scrollRef = useRef<HTMLDivElement>(null);
+    const [canScrollLeft, setCanScrollLeft] = useState(false);
+    const [canScrollRight, setCanScrollRight] = useState(true);
+
+    const checkScroll = () => {
+        if (scrollRef.current) {
+            const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+            setCanScrollLeft(scrollLeft > 10);
+            setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+        }
+    };
+
+    const scroll = (direction: "left" | "right") => {
+        if (scrollRef.current) {
+            const { clientWidth } = scrollRef.current;
+            // Scroll by full width as requested
+            const scrollAmount = direction === "left" ? -clientWidth : clientWidth;
+            scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+        }
+    };
+
+    useEffect(() => {
+        checkScroll();
+        window.addEventListener("resize", checkScroll);
+        return () => window.removeEventListener("resize", checkScroll);
+    }, []);
 
     return (
         <section
@@ -141,11 +169,61 @@ const Services: React.FC = () => {
                     </p>
                 </div>
 
-                {/* Grid */}
-                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                    {services.map((service, i) => (
-                        <ServiceCard key={service.id} service={service} index={i} isRTL={isRTL} />
-                    ))}
+                {/* Slider Container */}
+                <div className="relative group/slider px-2">
+                    <div
+                        ref={scrollRef}
+                        onScroll={checkScroll}
+                        className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory pb-8"
+                        style={{
+                            scrollbarWidth: "none",
+                            msOverflowStyle: "none",
+                        }}
+                    >
+                        {services.map((service, i) => (
+                            <div 
+                                key={service.id} 
+                                className="shrink-0 w-full sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)] snap-center pt-4 flex"
+                            >
+                                <ServiceCard service={service} index={i} isRTL={isRTL} />
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Navigation Arrows - Bottom Center */}
+                    <div className="flex justify-center gap-5 mt-4 z-20">
+                        <button
+                            onClick={() => scroll("left")}
+                            disabled={!canScrollLeft}
+                            className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${
+                                canScrollLeft 
+                                ? "border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/40 shadow-lg shadow-white/5" 
+                                : "border-white/5 bg-transparent text-white/20 cursor-not-allowed"
+                            }`}
+                            aria-label="Previous service"
+                        >
+                            {isRTL ? <ChevronRight className="w-6 h-6" /> : <ChevronLeft className="w-6 h-6" />}
+                        </button>
+                        <button
+                            onClick={() => scroll("right")}
+                            disabled={!canScrollRight}
+                            className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${
+                                canScrollRight 
+                                ? "border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/40 shadow-lg shadow-white/5" 
+                                : "border-white/5 bg-transparent text-white/20 cursor-not-allowed"
+                            }`}
+                            aria-label="Next service"
+                        >
+                            {isRTL ? <ChevronLeft className="w-6 h-6" /> : <ChevronRight className="w-6 h-6" />}
+                        </button>
+                    </div>
+
+                    {/* Custom Scrollbar CSS */}
+                    <style jsx global>{`
+                        .no-scrollbar::-webkit-scrollbar {
+                            display: none;
+                        }
+                    `}</style>
                 </div>
             </div>
         </section>

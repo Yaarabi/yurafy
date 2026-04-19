@@ -168,55 +168,64 @@ export default function ServiceForm({ isOpen, onClose, services, initialServiceT
     return (
         <AnimatePresence>
             {isOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+                <div 
+                    className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+                    onClick={onClose}
+                >
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.9 }}
-                        className="bg-white  rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+                        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                        className="relative bg-[#020617] border border-white/10 rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto no-scrollbar"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <div className="sticky top-0 p-6 flex items-center justify-between z-10" style={{ background: 'linear-gradient(to right, var(--brand-blue), #1e40af)' }}>
-                            <h2 className="text-2xl font-bold text-white">{t('form.title')}</h2>
+                        <div className="sticky top-0 p-6 flex items-center justify-between z-20 bg-[#020617]/80 backdrop-blur-xl border-b border-white/5">
+                            <div>
+                                <h2 className="text-2xl font-extrabold text-white tracking-tight">{t('form.title')}</h2>
+                                <p className="text-xs text-white/40 mt-1 uppercase tracking-widest font-bold">Request a Quote</p>
+                            </div>
                             <button
                                 onClick={onClose}
                                 className="text-white hover:bg-white/20 p-2 rounded-full transition-colors"
                             >
-                                <X className="w-6 h-6" />
+                                <X className="w-5 h-5" />
                             </button>
                         </div>
 
-                        <form onSubmit={handleSubmit} className="p-6 space-y-6">
+                        <div 
+                            className="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 blur-[100px] pointer-events-none rounded-full"
+                        />
+
+                        <form onSubmit={handleSubmit} className="relative z-10 p-8 space-y-7">
                             {/* Full Name */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700  mb-2">
+                            <div className="space-y-2">
+                                <label className="block text-xs font-bold text-white/50 uppercase tracking-widest">
                                     {t('form.fullName')} <span className="text-red-500">*</span>
                                 </label>
-                                <div className="relative">
-                                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                                <div className="relative group">
+                                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/30 group-focus-within:text-[#1E67C6] transition-colors" />
                                     <input
                                         type="text"
                                         name="fullName"
                                         value={formData.fullName}
                                         onChange={handleInputChange}
-                                        className={`w-full pl-11 pr-4 py-3 border ${
-                                            errors.fullName ? 'border-red-500' : 'border-gray-300 '
-                                        } rounded-lg focus:ring-2 focus:border-transparent bg-white  text-gray-900 `}
-                                        style={{ '--tw-ring-color': 'var(--brand-blue)' } as React.CSSProperties}
+                                        className={`w-full pl-12 pr-4 py-3.5 bg-white/5 border ${
+                                            errors.fullName ? 'border-red-500/50' : 'border-white/10'
+                                        } rounded-xl focus:ring-2 focus:ring-[#1E67C6]/50 focus:border-[#1E67C6] outline-none text-white transition-all placeholder:text-white/20`}
                                         placeholder={t('form.fullNamePlaceholder')}
                                     />
                                 </div>
                                 {errors.fullName && (
-                                    <p className="mt-1 text-sm text-red-500">{errors.fullName}</p>
+                                    <p className="mt-1 text-xs text-red-400 font-medium">{errors.fullName}</p>
                                 )}
                             </div>
 
                             {/* Phone Number */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700  mb-2">
+                            <div className="space-y-2">
+                                <label className="block text-xs font-bold text-white/50 uppercase tracking-widest">
                                     {t('form.phoneNumber')} <span className="text-red-500">*</span>
                                 </label>
-                                <div dir="ltr">
+                                <div dir="ltr" className="relative group">
                                     <PhoneInput
                                         defaultCountry="ma"
                                         value={formData.phoneNumber}
@@ -224,78 +233,77 @@ export default function ServiceForm({ isOpen, onClose, services, initialServiceT
                                             setFormData((prev) => ({ ...prev, phoneNumber: phone }));
                                             if (errors.phoneNumber) setErrors((prev) => ({ ...prev, phoneNumber: '' }));
                                         }}
-                                        className={`mt-1 block w-full border rounded-md ${errors.phoneNumber ? 'border-red-500' : 'border-gray-300 '}`}
-                                        style={{ '--react-international-phone-border-color': errors.phoneNumber ? '#fca5a5' : '#d1d5db', '--react-international-phone-focus-border-color': 'var(--brand-blue)' } as React.CSSProperties}
+                                        className={`phone-dark-input block w-full border-none rounded-xl ${errors.phoneNumber ? 'ring-1 ring-red-500/50' : ''}`}
+                                        style={{ 
+                                            padding: '4px',
+                                            '--react-international-phone-background': 'rgba(255,255,255,0.05)',
+                                            '--react-international-phone-text-color': 'white',
+                                            '--react-international-phone-border-color': 'rgba(255,255,255,0.1)',
+                                            '--react-international-phone-dropdown-item-background': '#1e293b',
+                                            '--react-international-phone-dropdown-item-text-color': 'white',
+                                            '--react-international-phone-dropdown-item-hover-background': '#334155'
+                                        } as React.CSSProperties}
                                         placeholder="+1 555 555 5555"
                                     />
                                 </div>
                                 {errors.phoneNumber && (
-                                    <p className="mt-1 text-sm text-red-500">{errors.phoneNumber}</p>
+                                    <p className="mt-1 text-xs text-red-400 font-medium">{errors.phoneNumber}</p>
                                 )}
                             </div>
 
                             {/* Email */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700  mb-2">
+                            <div className="space-y-2">
+                                <label className="block text-xs font-bold text-white/50 uppercase tracking-widest">
                                     {t('form.email')} ({t('form.optional')})
                                 </label>
-                                <div className="relative">
-                                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                                <div className="relative group">
+                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/30 group-focus-within:text-[#1E67C6] transition-colors" />
                                     <input
                                         type="email"
                                         name="email"
                                         value={formData.email}
                                         onChange={handleInputChange}
-                                        className={`w-full pl-11 pr-4 py-3 border ${
-                                            errors.email ? 'border-red-500' : 'border-gray-300 '
-                                        } rounded-lg focus:ring-2 focus:border-transparent bg-white  text-gray-900 `}
-                                        style={{ '--tw-ring-color': 'var(--brand-blue)' } as React.CSSProperties}
+                                        className={`w-full pl-12 pr-4 py-3.5 bg-white/5 border ${
+                                            errors.email ? 'border-red-500/50' : 'border-white/10'
+                                        } rounded-xl focus:ring-2 focus:ring-[#1E67C6]/50 focus:border-[#1E67C6] outline-none text-white transition-all placeholder:text-white/20`}
                                         placeholder="example@email.com"
                                     />
                                 </div>
                                 {errors.email && (
-                                    <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+                                    <p className="mt-1 text-xs text-red-400 font-medium">{errors.email}</p>
                                 )}
                             </div>
 
                             {/* Service Type */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700  mb-2">
+                            <div className="space-y-2">
+                                <label className="block text-xs font-bold text-white/50 uppercase tracking-widest">
                                     {t('form.serviceType')} <span className="text-red-500">*</span>
                                 </label>
-                                {services.length === 0 && (
-                                    <div className="p-3 mb-3 bg-white  border border-yellow-200  rounded-lg">
-                                        <p className="text-sm text-yellow-800 ">
-                                            Services are loading. Please refresh the page if this persists.
-                                        </p>
-                                    </div>
-                                )}
-                                    <select
-                                        name="serviceType"
-                                        value={formData.serviceType}
-                                        onChange={handleInputChange}
-                                        disabled={services.length === 0}
-                                        className={`w-full px-4 py-3 border ${
-                                            errors.serviceType ? 'border-red-500' : 'border-gray-300 '
-                                        } rounded-lg focus:ring-2 focus:border-transparent bg-white  text-gray-900  disabled:opacity-50 disabled:cursor-not-allowed`}
-                                        style={{ '--tw-ring-color': 'var(--brand-blue)' } as React.CSSProperties}
-                                    >
-                                        <option value="">{t('form.selectService')}</option>
-                                        {services.map((service) => (
-                                            <option key={service.id} value={service.type}>
-                                                {service.type}
-                                            </option>
-                                        ))}
-                                        <option value="Other">{t('form.otherOption')}</option>
-                                    </select>
+                                <select
+                                    name="serviceType"
+                                    value={formData.serviceType}
+                                    onChange={handleInputChange}
+                                    disabled={services.length === 0}
+                                    className={`w-full px-4 py-3.5 bg-white/5 border ${
+                                        errors.serviceType ? 'border-red-500/50' : 'border-white/10'
+                                    } rounded-xl focus:ring-2 focus:ring-[#1E67C6]/50 focus:border-[#1E67C6] outline-none text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed`}
+                                >
+                                    <option value="" className="bg-[#020617]">{t('form.selectService')}</option>
+                                    {services.map((service) => (
+                                        <option key={service.id} value={service.type} className="bg-[#020617]">
+                                            {service.type}
+                                        </option>
+                                    ))}
+                                    <option value="Other" className="bg-[#020617]">{t('form.otherOption')}</option>
+                                </select>
                                 {errors.serviceType && (
-                                    <p className="mt-1 text-sm text-red-500">{errors.serviceType}</p>
+                                    <p className="mt-1 text-xs text-red-400 font-medium">{errors.serviceType}</p>
                                 )}
                             </div>
 
-                            {/* Domain of Work (Optional / Required if Other) */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700  mb-2">
+                            {/* Domain of Work */}
+                            <div className="space-y-2">
+                                <label className="block text-xs font-bold text-white/50 uppercase tracking-widest">
                                     {t('form.domainOfWork')} {formData.serviceType === 'Other' && <span className="text-red-500">*</span>} {formData.serviceType !== 'Other' && `(${t('form.optional')})`}
                                 </label>
                                 <input
@@ -303,70 +311,89 @@ export default function ServiceForm({ isOpen, onClose, services, initialServiceT
                                     name="domainOfWork"
                                     value={formData.domainOfWork}
                                     onChange={handleInputChange}
-                                    className={`w-full px-4 py-3 border ${
-                                        errors.domainOfWork ? 'border-red-500' : 'border-gray-300 '
-                                    } rounded-lg focus:ring-2 focus:border-transparent bg-white  text-gray-900 `}
-                                    style={{ '--tw-ring-color': 'var(--brand-blue)' } as React.CSSProperties}
+                                    className={`w-full px-4 py-3.5 bg-white/5 border ${
+                                        errors.domainOfWork ? 'border-red-500/50' : 'border-white/10'
+                                    } rounded-xl focus:ring-2 focus:ring-[#1E67C6]/50 focus:border-[#1E67C6] outline-none text-white transition-all placeholder:text-white/20`}
                                     placeholder={t('form.domainOfWorkPlaceholder')}
                                     maxLength={100}
                                 />
                                 {errors.domainOfWork && (
-                                    <p className="mt-1 text-sm text-red-500">{errors.domainOfWork}</p>
+                                    <p className="mt-1 text-xs text-red-400 font-medium">{errors.domainOfWork}</p>
                                 )}
                             </div>
 
-                            {/* Message (Optional) */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700  mb-2">
+                            {/* Message */}
+                            <div className="space-y-2">
+                                <label className="block text-xs font-bold text-white/50 uppercase tracking-widest">
                                     {t('form.message')} ({t('form.optional')})
                                 </label>
-                                <div className="relative">
-                                    <MessageSquare className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
-                                            <textarea
-                                                name="message"
-                                                value={formData.message}
-                                                onChange={handleInputChange}
-                                                rows={4}
-                                                className={`w-full pl-11 pr-4 py-3 border ${errors.message ? 'border-red-500' : 'border-gray-300 '} rounded-lg focus:ring-2 focus:border-transparent bg-white  text-gray-900  resize-none`}
-                                                style={{ '--tw-ring-color': 'var(--brand-blue)' } as React.CSSProperties}
-                                                placeholder={t('form.messagePlaceholder')}
-                                                maxLength={1000}
-                                            />
-                                            {errors.message && (
-                                                <p className="mt-1 text-sm text-red-500">{errors.message}</p>
-                                            )}
+                                <div className="relative group">
+                                    <MessageSquare className="absolute left-4 top-4 w-5 h-5 text-white/30 group-focus-within:text-[#1E67C6] transition-colors" />
+                                    <textarea
+                                        name="message"
+                                        value={formData.message}
+                                        onChange={handleInputChange}
+                                        rows={4}
+                                        className={`w-full pl-12 pr-4 py-3.5 bg-white/5 border ${
+                                            errors.message ? 'border-red-500/50' : 'border-white/10'
+                                        } rounded-xl focus:ring-2 focus:ring-[#1E67C6]/50 focus:border-[#1E67C6] outline-none text-white transition-all placeholder:text-white/20 resize-none`}
+                                        placeholder={t('form.messagePlaceholder')}
+                                        maxLength={1000}
+                                    />
                                 </div>
+                                {errors.message && (
+                                    <p className="mt-1 text-xs text-red-400 font-medium">{errors.message}</p>
+                                )}
                             </div>
 
-                            {/* Submit Button */}
-                            <div className="flex gap-4">
+                            {/* Actions */}
+                            <div className="flex flex-col sm:flex-row gap-4 pt-4">
                                 <button
                                     type="button"
                                     onClick={onClose}
-                                    className="flex-1 px-6 py-3 border-2 border-gray-300  text-gray-700  rounded-lg font-semibold hover:bg-white :bg-gray-700 transition-colors"
+                                    className="flex-1 px-8 py-4 bg-white/5 border border-white/10 text-white rounded-2xl font-bold hover:bg-white/10 transition-all uppercase tracking-widest text-xs"
                                 >
                                     {t('form.cancel')}
                                 </button>
                                 <button
                                     type="submit"
                                     disabled={submitting}
-                                    className="flex-1 px-6 py-3 text-white rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-2 hover:opacity-90"
-                                    style={{ background: 'linear-gradient(to right, var(--brand-blue), #1e40af)' }}
+                                    className="flex-1 px-8 py-4 bg-gradient-to-r from-[#1E67C6] to-[#13FFAA] text-[#020617] rounded-2xl font-bold disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-xl shadow-blue-500/10 hover:shadow-blue-500/20 active:scale-95 flex items-center justify-center gap-2 uppercase tracking-widest text-xs"
                                 >
                                     {submitting ? (
                                         <>
-                                            <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                            <div className="w-4 h-4 border-2 border-[#020617]/30 border-t-[#020617] rounded-full animate-spin" />
                                             {t('form.submitting')}
                                         </>
                                     ) : (
                                         <>
-                                            <Check className="w-5 h-5" />
+                                            <Check className="w-4 h-4" />
                                             {t('form.submit')}
                                         </>
                                     )}
                                 </button>
                             </div>
                         </form>
+
+                        <style jsx global>{`
+                            .no-scrollbar::-webkit-scrollbar {
+                                display: none;
+                            }
+                            .phone-dark-input .react-international-phone-input {
+                                width: 100% !important;
+                                background: transparent !important;
+                                border: none !important;
+                                height: 50px !important;
+                                color: white !important;
+                                font-size: 1rem !important;
+                            }
+                            .phone-dark-input .react-international-phone-country-selector-button {
+                                background: transparent !important;
+                                border: none !important;
+                                height: 50px !important;
+                                padding-left: 12px !important;
+                            }
+                        `}</style>
                     </motion.div>
                 </div>
             )}

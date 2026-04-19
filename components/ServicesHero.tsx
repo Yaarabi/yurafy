@@ -62,8 +62,8 @@ export default function ServicesHero({
       <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col justify-center min-h-[100vh]">
         
         {/* Top Bar */}
-        <div className="flex items-center justify-between mb-14">
-          <Link href={`/${locale}`} className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-14">
+          <Link href={`/${locale}`} className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 text-center sm:text-left">
             <Image
               src="/favi.png"
               alt="Yurafy logo"
@@ -80,8 +80,7 @@ export default function ServicesHero({
             </div>
           </Link>
 
-          <div className="flex items-center gap-3">
-            <Globe2 className="w-5 h-5 text-white/70" />
+          <div className="flex items-center">
             <LocaleSwitcher />
           </div>
         </div>
