@@ -1,4 +1,5 @@
 import { NextIntlClientProvider } from 'next-intl';
+import '../globals.css';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
@@ -183,30 +184,18 @@ export default async function LocaleLayout({
   };
 
   return (
-    <html lang={locale} dir={dir}>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin=""
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(structuredData),
-          }}
-        />
-      </head>
-      <body style={{ fontFamily: "'Inter', sans-serif", margin: 0 }} suppressHydrationWarning>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData),
+        }}
+      />
+      <div style={{ fontFamily: "'Inter', sans-serif" }}>
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>
-      </body>
-    </html>
+      </div>
+    </>
   );
 }

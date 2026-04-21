@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Quote, MessageSquare } from "lucide-react";
+import Image from "next/image";
 
 interface FounderSectionProps {
     onRequestQuote: () => void;
@@ -40,12 +41,15 @@ export default function FounderSection({ onRequestQuote }: FounderSectionProps) 
                         <div className="absolute -inset-4 bg-gradient-to-tr from-[#1E67C6]/20 to-[#13FFAA]/20 blur-2xl rounded-[40px] opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
                         
                         <div className="relative aspect-[4/5] rounded-[32px] overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm">
-                            {/* Placeholder for real image */}
-                            <div className="absolute inset-0 flex items-center justify-center bg-[#020617]/40">
-                                <p className="text-white/20 text-sm font-medium uppercase tracking-widest">
-                                    Founder Image Placeholder
-                                </p>
-                            </div>
+                            {/* Founder Image */}
+                            <Image 
+                                src="/profile.webp"
+                                alt={t("name")}
+                                fill
+                                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                sizes="(max-width: 450px) 100vw, 450px"
+                                priority
+                            />
                             
                             {/* Accent overlay */}
                             <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent opacity-60" />
