@@ -69,8 +69,8 @@ export default function Footer() {
                     <ul className="space-y-2.5 text-sm" style={{ color: "rgba(255,255,255,0.4)" }}>
                         {[
                             { label: t("navigation.home"),     href: `/${locale}#home` },
-                            { label: t("navigation.products"), href: `/${locale}#features` },
-                            { label: t("navigation.pricing"),  href: `/${locale}#pricing` },
+                            { label: t("navigation.projects"), href: `/${locale}/projects` },
+                            { label: t("navigation.pricing"),  href: `/${locale}/pricing` },
                             { label: t("navigation.about"),    href: `/${locale}#about` },
                             { label: "Login",                  href: `/${locale}/login` },
                         ].map(({ label, href }) => (

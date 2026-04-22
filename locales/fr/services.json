@@ -37,6 +37,18 @@
         "performanceSeo": {
           "title": "Performance & SEO",
           "description": "Sites web optimisés avec des temps de chargement rapides, des données structurées et les meilleures pratiques SEO."
+        },
+        "automations": {
+          "title": "Automatisation des flux",
+          "description": "Optimisez vos processus métier avec des flux de travail automatisés et des intégrations API sur mesure."
+        },
+        "aiAgents": {
+          "title": "Agents IA & Chatbots",
+          "description": "Des agents IA intelligents conçus pour gérer le support client, les ventes et l'automatisation de tâches complexes."
+        },
+        "fineTuning": {
+          "title": "Fine-Tuning de LLM",
+          "description": "Modèles d'IA personnalisés entraînés sur vos données spécifiques pour une précision et des performances supérieures."
         }
       }
     },
@@ -106,6 +118,7 @@
     "projectsSubtitle": "Une sélection de projets récents de développement web.",
     "projectsEmpty": "Aucun projet pour le moment. Revenez bientôt.",
     "projectsView": "Voir le projet",
+    "projectsViewMore": "Voir plus",
     "faq": {
       "title": "Questions fréquentes",
       "items": {
@@ -193,6 +206,102 @@
       "role": "Développeur Full-Stack & Fondateur de Yurafy",
       "bio": "Je ne me contente pas de créer des sites ; je conçois des applications web haute performance, des plateformes SaaS et des systèmes numériques sur mesure axés sur la scalabilité technique. En choisissant Yurafy, vous collaborez directement avec moi pour transformer vos besoins complexes en produits rapides, fiables et générant des résultats concrets.",
       "cta": "Discuter de votre projet avec moi"
+    },
+    "pricing": {
+      "badge": "Tarifs",
+      "title": "Une tarification transparente pour chaque objectif",
+      "subtitle": "Choisissez le forfait idéal pour votre entreprise. Pas de frais cachés, juste des résultats de haute qualité.",
+      "currency": "DH",
+      "startFrom": "À partir de",
+      "cta": "Commencer",
+      "plans": {
+        "youcan": {
+          "name": "Boutique YouCan",
+          "price": "199",
+          "features": [
+            "Page d'accueil optimisée",
+            "Page produit professionnelle",
+            "Mise en ligne de 5 produits",
+            "Conception de logo personnalisée",
+            "Sliders interactifs",
+            "Configuration SEO de base"
+          ]
+        },
+        "shopify": {
+          "name": "Boutique Shopify",
+          "price": "500",
+          "features": [
+            "Configuration de thème Premium",
+            "Pages Accueil & Produit sur mesure",
+            "Mise en ligne jusqu'à 10 produits",
+            "Intégration d'applications essentielles",
+            "Conception de logo personnalisée",
+            "Optimisation SEO avancée"
+          ]
+        },
+        "woocommerce": {
+          "name": "Boutique WooCommerce",
+          "price": "900",
+          "features": [
+            "1 an d'hébergement & domaine",
+            "Configuration & design complets",
+            "Mise en ligne jusqu'à 10 produits",
+            "Intégration passerelle de paiement",
+            "Logo & Branding",
+            "Pack SEO complet"
+          ]
+        },
+        "basic": {
+          "name": "Site Web Basique",
+          "price": "1000",
+          "features": [
+            "5 pages personnalisées",
+            "Design moderne responsive",
+            "Formulaire de contact & Plan",
+            "Intégration réseaux sociaux",
+            "SEO & Analytics de base",
+            "Optimisation de la vitesse"
+          ]
+        },
+        "pro": {
+          "name": "Site Web Pro",
+          "price": "2000",
+          "features": [
+            "Pages illimitées",
+            "Design UI/UX sur mesure",
+            "Intégrations API avancées",
+            "Système de gestion de contenu",
+            "Support prioritaire",
+            "Audit SEO & Performance complet"
+          ]
+        },
+        "automation": {
+          "name": "Automatisation des flux",
+          "price": "Sur mesure",
+          "badge": "n8n / Zapier",
+          "features": [
+            "Flux de travail automatisés",
+            "Intégrations CRM & API",
+            "Déploiements n8n personnalisés",
+            "Optimisation des processus",
+            "Sync des données en temps réel",
+            "Surveillance des erreurs"
+          ]
+        },
+        "aiAgent": {
+          "name": "Solutions d'Agents IA",
+          "price": "Sur mesure",
+          "badge": "Nouveau",
+          "features": [
+            "Agents de support IA sur mesure",
+            "Fine-Tuning de LLM",
+            "Intégration Voix & Texte",
+            "Configuration base de connaissances",
+            "Gestion client 24/7",
+            "Analyse de données avancée"
+          ]
+        }
+      }
     }
   },
   "Footer": {
@@ -201,7 +310,7 @@
     "navigation": {
       "title": "Navigation",
       "home": "Accueil",
-      "products": "Produits",
+      "projects": "Projets",
       "pricing": "Tarifs",
       "about": "À propos"
     },

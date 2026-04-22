@@ -4,7 +4,6 @@ import { Globe2, ArrowRight, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import LocaleSwitcher from "@/components/LocaleSwitcher";
 import { Stars } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { useEffect } from "react";
@@ -61,37 +60,33 @@ export default function ServicesHero({
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col justify-center min-h-[100vh]">
         
-        {/* Top Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-14">
-          <Link href={`/${locale}`} className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 text-center sm:text-left">
+        {/* Top Bar — always centered */}
+        <div className="flex items-center justify-center mb-8 sm:mb-14">
+          <Link href={`/${locale}`} className="flex flex-col items-center gap-2 text-center">
             <Image
               src="/favi.png"
               alt="Yurafy logo"
-              width={56}
-              height={56}
+              width={48}
+              height={48}
               className="object-contain drop-shadow-lg"
               priority
             />
             <div>
-              <h2 className="text-2xl font-bold">Yurafy</h2>
-              <p className="text-sm text-white/70">
+              <h2 className="text-xl sm:text-2xl font-bold">Yurafy</h2>
+              <p className="text-xs sm:text-sm text-white/70">
                 Professional Services
               </p>
             </div>
           </Link>
-
-          <div className="flex items-center">
-            <LocaleSwitcher />
-          </div>
         </div>
 
         {/* Hero Content */}
         <div className="text-center max-w-5xl mx-auto">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-8 bg-gradient-to-br from-white to-gray-400 bg-clip-text text-transparent">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-5 sm:mb-8 bg-gradient-to-br from-white to-gray-400 bg-clip-text text-transparent">
             {t("hero.title")}
           </h1>
 
-          <p className="text-lg sm:text-xl md:text-2xl text-white/80 mb-12 leading-relaxed">
+          <p className="text-base sm:text-xl md:text-2xl text-white/80 mb-8 sm:mb-12 leading-relaxed">
             {t("hero.subtitle")}
           </p>
 

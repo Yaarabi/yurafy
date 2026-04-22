@@ -2,7 +2,10 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, ChevronLeft, ChevronRight, LayoutPanelTop } from "lucide-react";
+import { getProjects } from "@/app/actions/projects";
+import { motion } from "framer-motion";
+import Link from "next/link";
 
 interface Project {
     _id: string;
@@ -16,24 +19,32 @@ export default function Projects({ locale, initialProjects }: { locale: string; 
     const isRTL = locale === "ar";
     const [projects, setProjects] = useState<Project[]>(initialProjects || []);
     const [loading, setLoading] = useState(!initialProjects);
-    const headerRef = useRef<HTMLDivElement>(null);
+    
+    const scrollRef = useRef<HTMLDivElement>(null);
+    const [canScrollLeft, setCanScrollLeft] = useState(false);
+    const [canScrollRight, setCanScrollRight] = useState(true);
+
+    const checkScroll = () => {
+        if (scrollRef.current) {
+            const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+            setCanScrollLeft(scrollLeft > 10);
+            setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+        }
+    };
+
+    const scroll = (direction: "left" | "right") => {
+        if (scrollRef.current) {
+            const { clientWidth } = scrollRef.current;
+            const scrollAmount = direction === "left" ? -clientWidth : clientWidth;
+            scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+        }
+    };
 
     useEffect(() => {
-        const el = headerRef.current;
-        if (!el) return;
-        const obs = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    el.style.opacity = "1";
-                    el.style.transform = "translateY(0)";
-                    obs.disconnect();
-                }
-            },
-            { threshold: 0.2 }
-        );
-        obs.observe(el);
-        return () => obs.disconnect();
-    }, []);
+        checkScroll();
+        window.addEventListener("resize", checkScroll);
+        return () => window.removeEventListener("resize", checkScroll);
+    }, [projects]);
 
     useEffect(() => {
         if (initialProjects && initialProjects.length > 0) return;
@@ -41,9 +52,7 @@ export default function Projects({ locale, initialProjects }: { locale: string; 
         async function load() {
             try {
                 setLoading(true);
-                const res = await fetch("https://yurafy.com/api/projects", { cache: "no-store" });
-                if (!res.ok) throw new Error("Failed to load projects");
-                const data = await res.json();
+                const data = await getProjects();
                 if (!cancelled) setProjects(data.projects || []);
             } catch (err) {
                 console.error(err);
@@ -55,14 +64,14 @@ export default function Projects({ locale, initialProjects }: { locale: string; 
         return () => { cancelled = true; };
     }, [initialProjects]);
 
-    // Hero accent colors and their rgba equivalents for box-shadow
+    // Show only 4 projects
+    const displayedProjects = projects.slice(0, 4);
+
     const accentColors = [
         { hex: "#1E67C6", rgba: "rgba(30,103,198,0.18)"  },
         { hex: "#13FFAA", rgba: "rgba(19,255,170,0.15)"  },
         { hex: "#CE84CF", rgba: "rgba(206,132,207,0.15)" },
         { hex: "#DD335C", rgba: "rgba(221,51,92,0.15)"   },
-        { hex: "#1E67C6", rgba: "rgba(30,103,198,0.18)"  },
-        { hex: "#13FFAA", rgba: "rgba(19,255,170,0.15)"  },
     ];
 
     if (loading) {
@@ -109,17 +118,19 @@ export default function Projects({ locale, initialProjects }: { locale: string; 
 
             <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
-                <div
-                    ref={headerRef}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
                     className={`mb-14 ${isRTL ? "text-right" : "text-center"}`}
-                    style={{ opacity: 0, transform: "translateY(20px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
                 >
                     <span
                         className="inline-block text-xs font-bold tracking-[0.18em] uppercase px-4 py-1.5 rounded-full mb-4"
                         style={{
-                            background: "rgba(206,132,207,0.1)",
-                            color: "#CE84CF",
-                            border: "1px solid rgba(206,132,207,0.25)",
+                            background: "rgba(30,103,198,0.12)",
+                            color: "#1E67C6",
+                            border: "1px solid rgba(30,103,198,0.25)",
                         }}
                     >
                         {t("projectsTitle")}
@@ -127,73 +138,130 @@ export default function Projects({ locale, initialProjects }: { locale: string; 
                     <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-3 leading-tight">
                         {t("projectsSubtitle")}
                     </h2>
-                </div>
+                </motion.div>
 
-                {projects.length === 0 ? (
+                {displayedProjects.length === 0 ? (
                     <p className="text-center text-sm" style={{ color: "rgba(255,255,255,0.35)" }}>
                         {t("projectsEmpty")}
                     </p>
                 ) : (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                        {projects.map((p, i) => {
-                            const { hex, rgba } = accentColors[i % accentColors.length];
-                            return (
-                                <a
-                                    key={p._id}
-                                    href={p.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="group relative rounded-2xl overflow-hidden transition-transform duration-300 hover:-translate-y-1"
-                                    style={{
-                                        background: "rgba(255,255,255,0.03)",
-                                        border: "1px solid rgba(255,255,255,0.07)",
-                                    }}
-                                    onMouseEnter={e => {
-                                        e.currentTarget.style.borderColor = hex + "80";
-                                        e.currentTarget.style.boxShadow = `0 0 28px ${rgba}`;
-                                    }}
-                                    onMouseLeave={e => {
-                                        e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
-                                        e.currentTarget.style.boxShadow = "none";
-                                    }}
-                                >
-                                    {/* Image */}
-                                    <div className="relative h-48 overflow-hidden">
-                                        <img
-                                            src={p.img}
-                                            alt={p.name}
-                                            className="h-full w-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                                        />
-                                        {/* Always-on dark overlay, deepens on hover */}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent transition-opacity duration-300 group-hover:from-black/40" />
-                                        {/* Top accent line on hover */}
-                                        <div
-                                            className="absolute top-0 left-0 right-0 h-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                                            style={{ background: `linear-gradient(90deg, transparent, ${hex}, transparent)` }}
-                                        />
-                                    </div>
-
-                                    {/* Content */}
-                                    <div className="p-5 flex items-center justify-between gap-3">
-                                        <h4 className="text-sm font-semibold text-white truncate">
-                                            {p.name}
-                                        </h4>
-                                        <span
-                                            className="inline-flex items-center gap-1 text-xs font-semibold whitespace-nowrap transition-colors duration-300"
-                                            style={{ color: "rgba(255,255,255,0.35)" }}
-                                            onMouseEnter={e => (e.currentTarget.style.color = hex)}
-                                            onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.35)")}
+                    <div className="relative group/slider px-2">
+                        {/* Slider */}
+                        <div
+                            ref={scrollRef}
+                            onScroll={checkScroll}
+                            className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory pb-8"
+                            style={{
+                                scrollbarWidth: "none",
+                                msOverflowStyle: "none",
+                            }}
+                        >
+                            {displayedProjects.map((p, i) => {
+                                const { hex, rgba } = accentColors[i % accentColors.length];
+                                return (
+                                    <div 
+                                        key={p._id} 
+                                        className="shrink-0 w-full sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)] snap-center pt-2 flex"
+                                    >
+                                        <a
+                                            href={p.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="group relative rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-1 w-full flex flex-col"
+                                            style={{
+                                                background: "rgba(255,255,255,0.03)",
+                                                border: "1px solid rgba(255,255,255,0.07)",
+                                            }}
+                                            onMouseEnter={e => {
+                                                e.currentTarget.style.borderColor = hex + "50";
+                                                e.currentTarget.style.boxShadow = `0 0 32px ${rgba}`;
+                                            }}
+                                            onMouseLeave={e => {
+                                                e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
+                                                e.currentTarget.style.boxShadow = "none";
+                                            }}
                                         >
-                                            {t("projectsView")}
-                                            <ExternalLink className="w-3.5 h-3.5" />
-                                        </span>
+                                            {/* Image container */}
+                                            <div className="relative h-56 overflow-hidden">
+                                                <img
+                                                    src={p.img}
+                                                    alt={p.name}
+                                                    className="h-full w-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                                                />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent transition-opacity duration-300 group-hover:from-black/40" />
+                                                <div
+                                                    className="absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                                    style={{ background: `linear-gradient(90deg, transparent, ${hex}, transparent)` }}
+                                                />
+                                            </div>
+
+                                            {/* Content */}
+                                            <div className="p-6 flex items-center justify-between gap-4 mt-auto">
+                                                <h4 className="text-base font-bold text-white truncate">
+                                                    {p.name}
+                                                </h4>
+                                                <span
+                                                    className="inline-flex items-center gap-1.5 text-xs font-bold whitespace-nowrap transition-colors duration-300"
+                                                    style={{ color: "rgba(255,255,255,0.35)" }}
+                                                    onMouseEnter={e => (e.currentTarget.style.color = hex)}
+                                                    onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.35)")}
+                                                >
+                                                    {t("projectsView")}
+                                                    <ExternalLink className="w-3.5 h-3.5" />
+                                                </span>
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
-                            );
-                        })}
+                                );
+                            })}
+                        </div>
+
+                        {/* Navigation and View More */}
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-6">
+                            {/* Arrows */}
+                            <div className="flex items-center gap-4">
+                                <button
+                                    onClick={() => scroll("left")}
+                                    disabled={!canScrollLeft}
+                                    className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${
+                                        canScrollLeft 
+                                        ? "border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/40 shadow-lg shadow-white/5" 
+                                        : "border-white/5 bg-transparent text-white/20 cursor-not-allowed"
+                                    }`}
+                                >
+                                    {isRTL ? <ChevronRight className="w-5 h-5" /> : <ChevronLeft className="w-5 h-5" />}
+                                </button>
+                                <button
+                                    onClick={() => scroll("right")}
+                                    disabled={!canScrollRight}
+                                    className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${
+                                        canScrollRight 
+                                        ? "border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/40 shadow-lg shadow-white/5" 
+                                        : "border-white/5 bg-transparent text-white/20 cursor-not-allowed"
+                                    }`}
+                                >
+                                    {isRTL ? <ChevronLeft className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}
+                                </button>
+                            </div>
+
+                            {/* View More Button */}
+                            <Link 
+                                href={`/${locale}/projects`}
+                                className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-white/5 border border-white/10 rounded-2xl text-sm font-bold text-white hover:bg-white hover:text-[#020617] transition-all duration-300 shadow-xl shadow-blue-500/5 active:scale-95"
+                            >
+                                <LayoutPanelTop className="w-4 h-4" />
+                                <span>{t("projectsViewMore")}</span>
+                            </Link>
+                        </div>
                     </div>
                 )}
             </div>
+
+            <style jsx global>{`
+                .no-scrollbar::-webkit-scrollbar {
+                    display: none;
+                }
+            `}</style>
         </section>
     );
 }

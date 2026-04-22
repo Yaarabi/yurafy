@@ -4,6 +4,7 @@ import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { Metadata } from 'next';
+import AppNav from '@/components/AppNav';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -37,6 +38,9 @@ export async function generateMetadata({
     metadataBase: new URL(baseUrl),
     title,
     description,
+    icons: {
+      icon: '/favi.png',
+    },
     keywords: [
       'web development Morocco',
       'WordPress',
@@ -193,6 +197,7 @@ export default async function LocaleLayout({
       />
       <div style={{ fontFamily: "'Inter', sans-serif" }}>
         <NextIntlClientProvider messages={messages}>
+          <AppNav />
           {children}
         </NextIntlClientProvider>
       </div>

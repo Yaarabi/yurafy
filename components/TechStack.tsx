@@ -95,6 +95,7 @@ export default function HeroTechStackLogos() {
                                     alt={tech.name}
                                     fill
                                     sizes="36px"
+                                    unoptimized
                                     className="object-contain opacity-50 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0"
                                     loading="lazy"
                                 />

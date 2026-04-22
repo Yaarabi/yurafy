@@ -37,6 +37,18 @@
         "performanceSeo": {
           "title": "Performance & SEO",
           "description": "Optimized websites with fast load times, structured data, and best practices to boost search rankings and retention."
+        },
+        "automations": {
+          "title": "Workflow Automation",
+          "description": "Streamline your business processes with custom automated workflows and API integrations."
+        },
+        "aiAgents": {
+          "title": "AI Agents & Chatbots",
+          "description": "Intelligent AI agents designed to handle customer support, sales, and complex task automation."
+        },
+        "fineTuning": {
+          "title": "LLM Fine-Tuning",
+          "description": "Customized AI models trained on your specific business data for superior accuracy and performance."
         }
       }
     },
@@ -106,6 +118,7 @@
     "projectsSubtitle": "A selection of recent web development projects and case studies.",
     "projectsEmpty": "No projects yet. Check back soon.",
     "projectsView": "View project",
+    "projectsViewMore": "View More",
     "faq": {
       "title": "Frequently Asked Questions",
       "items": {
@@ -193,6 +206,102 @@
       "role": "Full-Stack Developer & Founder of Yurafy",
       "bio": "I don't just build websites; I engineer high-performance web applications, SaaS platforms, and custom digital systems designed for technical scalability. When you partner with Yurafy, you work directly with me to transform complex business requirements into fast, reliable products that deliver measurable results.",
       "cta": "Discuss Your Project Directly"
+    },
+    "pricing": {
+      "badge": "Pricing Plans",
+      "title": "Transparent Pricing for Every Goal",
+      "subtitle": "Choose the perfect package for your business. No hidden fees, just high-quality results.",
+      "currency": "DH",
+      "startFrom": "Starting from",
+      "cta": "Get Started",
+      "plans": {
+        "youcan": {
+          "name": "YouCan Store",
+          "price": "199",
+          "features": [
+            "Optimized Home Page",
+            "Professional Product Page",
+            "Listing of 5 Products",
+            "Custom Logo Design",
+            "Interactive Sliders",
+            "Basic SEO Setup"
+          ]
+        },
+        "shopify": {
+          "name": "Shopify Store",
+          "price": "500",
+          "features": [
+            "Premium Theme Setup",
+            "Custom Home & Product Pages",
+            "Up to 10 Products Listing",
+            "Essential App Integrations",
+            "Custom Logo Design",
+            "Advanced SEO Optimization"
+          ]
+        },
+        "woocommerce": {
+          "name": "WooCommerce Store",
+          "price": "900",
+          "features": [
+            "1 Year Hosting & Domain",
+            "Full Store Setup & Design",
+            "Up to 10 Products Listing",
+            "Payment Gateway Integration",
+            "Logo & Branding",
+            "Complete SEO Package"
+          ]
+        },
+        "basic": {
+          "name": "Basic Website",
+          "price": "1000",
+          "features": [
+            "5 Custom Pages",
+            "Responsive Modern Design",
+            "Contact Form & Map",
+            "Social Media Integration",
+            "Basic SEO & Analytics",
+            "Speed Optimization"
+          ]
+        },
+        "pro": {
+          "name": "Pro Website",
+          "price": "2000",
+          "features": [
+            "Unlimited Pages",
+            "Bespoke UI/UX Design",
+            "Advanced API Integrations",
+            "Content Management System",
+            "Priority Support",
+            "Full SEO & Performance Audit"
+          ]
+        },
+        "automation": {
+          "name": "Workflow Automation",
+          "price": "Custom",
+          "badge": "n8n / Zapier",
+          "features": [
+            "Automated Business Workflows",
+            "CRM & API Integrations",
+            "Custom n8n Deployments",
+            "Process Optimization",
+            "Real-time Data Sync",
+            "Error Monitoring"
+          ]
+        },
+        "aiAgent": {
+          "name": "AI Agent Solutions",
+          "price": "Custom",
+          "badge": "New",
+          "features": [
+            "Custom AI Support Agents",
+            "LLM Fine-Tuning",
+            "Voice & Text Integration",
+            "Knowledge Base Setup",
+            "24/7 Customer Handling",
+            "Advanced Data Analysis"
+          ]
+        }
+      }
     }
   },
   "Footer": {
@@ -201,7 +310,7 @@
     "navigation": {
       "title": "Navigation",
       "home": "Home",
-      "products": "Products",
+      "projects": "Projects",
       "pricing": "Pricing",
       "about": "About"
     },

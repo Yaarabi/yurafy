@@ -62,13 +62,13 @@ export default function HomePage() {
       {/* 8 — CTA banner */}
       <ServicesCTA onRequestQuote={() => openForm()} />
 
-      {/* 8 — Custom/different idea prompt */}
+      {/* 9 — Custom/different idea prompt */}
       <DifferentIdea onRequest={() => openForm()} />
 
-      {/* 9 — FAQ accordion */}
+      {/* 10 — FAQ accordion */}
       <ServicesFAQ locale={locale} />
 
-      {/* 10 — Footer */}
+      {/* 11 — Footer */}
       <Footer />
 
       {/* Floating support chat */}

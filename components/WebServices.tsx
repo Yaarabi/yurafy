@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
-import { ShoppingBag, Layout, Globe, Smartphone, Code2, Zap, ChevronLeft, ChevronRight } from "lucide-react";
+import { ShoppingBag, Layout, Globe, Smartphone, Code2, Zap, ChevronLeft, ChevronRight, Bot, Cpu, BrainCircuit } from "lucide-react";
 import { useState } from "react";
 
 interface ServiceItem {
@@ -15,12 +15,15 @@ interface ServiceItem {
 
 // Mapped to hero palette
 const services: ServiceItem[] = [
-    { id: "1", key: "wordpress",      icon: Globe,       accent: "#1E67C6", glow: "rgba(30,103,198,0.18)"   },
-    { id: "2", key: "ecommerce",      icon: ShoppingBag, accent: "#13FFAA", glow: "rgba(19,255,170,0.15)"   },
-    { id: "3", key: "uiux",           icon: Layout,      accent: "#CE84CF", glow: "rgba(206,132,207,0.15)"  },
-    { id: "4", key: "responsive",     icon: Smartphone,  accent: "#DD335C", glow: "rgba(221,51,92,0.15)"    },
-    { id: "5", key: "customWebApps",  icon: Code2,       accent: "#1E67C6", glow: "rgba(30,103,198,0.18)"   },
-    { id: "6", key: "performanceSeo", icon: Zap,         accent: "#13FFAA", glow: "rgba(19,255,170,0.15)"   },
+    { id: "1", key: "wordpress", icon: Globe, accent: "#1E67C6", glow: "rgba(30,103,198,0.18)" },
+    { id: "2", key: "ecommerce", icon: ShoppingBag, accent: "#13FFAA", glow: "rgba(19,255,170,0.15)" },
+    { id: "3", key: "uiux", icon: Layout, accent: "#CE84CF", glow: "rgba(206,132,207,0.15)" },
+    { id: "4", key: "responsive", icon: Smartphone, accent: "#DD335C", glow: "rgba(221,51,92,0.15)" },
+    { id: "5", key: "customWebApps", icon: Code2, accent: "#1E67C6", glow: "rgba(30,103,198,0.18)" },
+    { id: "6", key: "performanceSeo", icon: Zap, accent: "#13FFAA", glow: "rgba(19,255,170,0.15)" },
+    { id: "7", key: "automations", icon: Cpu, accent: "#CE84CF", glow: "rgba(206,132,207,0.15)" },
+    { id: "8", key: "aiAgents", icon: Bot, accent: "#DD335C", glow: "rgba(221,51,92,0.15)" },
+    { id: "9", key: "fineTuning", icon: BrainCircuit, accent: "#1E67C6", glow: "rgba(30,103,198,0.18)" },
 ];
 
 function ServiceCard({ service, index, isRTL }: { service: ServiceItem; index: number; isRTL: boolean }) {
@@ -100,7 +103,7 @@ const Services: React.FC = () => {
     const t = useTranslations("services");
     const locale = useLocale();
     const isRTL = locale === "ar";
-    
+
     const scrollRef = useRef<HTMLDivElement>(null);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(true);
@@ -181,8 +184,8 @@ const Services: React.FC = () => {
                         }}
                     >
                         {services.map((service, i) => (
-                            <div 
-                                key={service.id} 
+                            <div
+                                key={service.id}
                                 className="shrink-0 w-full sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)] snap-center pt-4 flex"
                             >
                                 <ServiceCard service={service} index={i} isRTL={isRTL} />
@@ -195,11 +198,10 @@ const Services: React.FC = () => {
                         <button
                             onClick={() => scroll("left")}
                             disabled={!canScrollLeft}
-                            className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${
-                                canScrollLeft 
-                                ? "border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/40 shadow-lg shadow-white/5" 
-                                : "border-white/5 bg-transparent text-white/20 cursor-not-allowed"
-                            }`}
+                            className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${canScrollLeft
+                                    ? "border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/40 shadow-lg shadow-white/5"
+                                    : "border-white/5 bg-transparent text-white/20 cursor-not-allowed"
+                                }`}
                             aria-label="Previous service"
                         >
                             {isRTL ? <ChevronRight className="w-6 h-6" /> : <ChevronLeft className="w-6 h-6" />}
@@ -207,11 +209,10 @@ const Services: React.FC = () => {
                         <button
                             onClick={() => scroll("right")}
                             disabled={!canScrollRight}
-                            className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${
-                                canScrollRight 
-                                ? "border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/40 shadow-lg shadow-white/5" 
-                                : "border-white/5 bg-transparent text-white/20 cursor-not-allowed"
-                            }`}
+                            className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${canScrollRight
+                                    ? "border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/40 shadow-lg shadow-white/5"
+                                    : "border-white/5 bg-transparent text-white/20 cursor-not-allowed"
+                                }`}
                             aria-label="Next service"
                         >
                             {isRTL ? <ChevronLeft className="w-6 h-6" /> : <ChevronRight className="w-6 h-6" />}
