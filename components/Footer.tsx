@@ -2,12 +2,14 @@
 import { FaInstagram, FaWhatsapp, FaLinkedin, FaYoutube, FaFacebook } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
+import Image from "next/image";
 
 export default function Footer() {
     const t = useTranslations("Footer");
     const params = useParams();
     const locale = (params.locale as string) || "en";
-    const url = `https://wa.me/+212716413605?text=${encodeURIComponent("Bonjour, je veux plus d'informations!")}`;
+    const isRTL = locale === "ar";
+    const url = "https://wa.me/+212716413605";
 
     const socials = [
         { href: "https://www.instagram.com/yurafy_com", icon: FaInstagram, label: "Instagram", hover: "#CE84CF" },
@@ -20,15 +22,18 @@ export default function Footer() {
         <footer
             className="relative overflow-hidden pt-16 pb-6"
             style={{ background: "#020617", borderTop: "1px solid rgba(255,255,255,0.07)" }}
+            dir={isRTL ? "rtl" : "ltr"}
         >
             {/* Ambient glow */}
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-48 pointer-events-none"
                 style={{ background: "radial-gradient(ellipse at bottom, rgba(30,103,198,0.08), transparent 70%)" }} />
 
-            <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10">
+            <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-10">
                 {/* Brand */}
-                <div>
-                    <h2 className="text-xl font-bold text-white mb-3">{t("companyName")}</h2>
+                <div className={`col-span-2 md:col-span-1 ${isRTL ? "text-right" : "text-left"}`}>
+                    <div className="mb-6">
+                        <Image src="/yurafy.svg" alt="Yurafy" width={120} height={40} className="h-10 w-auto" priority />
+                    </div>
                     <p className="text-sm leading-relaxed mb-5" style={{ color: "rgba(255,255,255,0.4)" }}>
                         {t("companyDescription")}
                     </p>
@@ -62,7 +67,7 @@ export default function Footer() {
                 </div>
 
                 {/* Navigation */}
-                <div>
+                <div className={`col-span-1 md:col-span-1 ${isRTL ? "text-right" : "text-left"}`}>
                     <h3 className="text-sm font-semibold text-white mb-4 tracking-wide uppercase">
                         {t("navigation.title")}
                     </h3>
@@ -72,7 +77,6 @@ export default function Footer() {
                             { label: t("navigation.projects"), href: `/${locale}/projects` },
                             { label: t("navigation.pricing"),  href: `/${locale}/pricing` },
                             { label: t("navigation.about"),    href: `/${locale}#about` },
-                            { label: "Login",                  href: `/${locale}/login` },
                         ].map(({ label, href }) => (
                             <li key={label}>
                                 <a
@@ -87,17 +91,16 @@ export default function Footer() {
                 </div>
 
                 {/* Resources */}
-                <div>
+                <div className={`col-span-1 md:col-span-1 ${isRTL ? "text-right" : "text-left"}`}>
                     <h3 className="text-sm font-semibold text-white mb-4 tracking-wide uppercase">
                         {t("resources.title")}
                     </h3>
                     <ul className="space-y-2.5 text-sm" style={{ color: "rgba(255,255,255,0.4)" }}>
                         {[
-                            { label: t("resources.resources"), href: `/${locale}/resources` },
-                            { label: t("resources.blog"),      href: `/${locale}/blog` },
-                            { label: t("resources.support"),   href: `/${locale}/support` },
+                            { label: t("resources.resources"), href: `/${locale}/blog` },
+                            { label: t("resources.support"),   href: `/${locale}#cta` },
                             { label: t("resources.terms"),     href: `/${locale}/terms` },
-                            { label: t("resources.services"),  href: `/${locale}/services` },
+                            { label: t("resources.services"),  href: `/${locale}#services` },
                         ].map(({ label, href }) => (
                             <li key={label}>
                                 <a
@@ -112,7 +115,7 @@ export default function Footer() {
                 </div>
 
                 {/* Contact */}
-                <div>
+                <div className={`col-span-2 md:col-span-1 ${isRTL ? "text-right" : "text-left"}`}>
                     <h3 className="text-sm font-semibold text-white mb-4 tracking-wide uppercase">
                         {t("contact.title")}
                     </h3>
@@ -142,7 +145,7 @@ export default function Footer() {
                                 href={href}
                                 target={target}
                                 rel={target ? "noopener noreferrer" : undefined}
-                                className="flex items-center gap-3 text-sm group transition-all duration-200"
+                                className={`flex items-center gap-3 text-sm group transition-all duration-200 ${isRTL ? "flex-row-reverse" : ""}`}
                                 style={{ color: "rgba(255,255,255,0.4)" }}
                                 onMouseEnter={e => (e.currentTarget.style.color = color)}
                                 onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.4)")}
@@ -157,7 +160,7 @@ export default function Footer() {
                             </a>
                         ))}
 
-                        <div className="flex items-center gap-3 text-sm" style={{ color: "rgba(255,255,255,0.35)" }}>
+                        <div className={`flex items-center gap-3 text-sm ${isRTL ? "flex-row-reverse" : ""}`} style={{ color: "rgba(255,255,255,0.35)" }}>
                             <span
                                 className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0"
                                 style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)" }}
@@ -188,7 +191,7 @@ export default function Footer() {
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="fixed bottom-5 left-5 sm:bottom-6 sm:left-6 p-3.5 rounded-full shadow-xl z-50 flex items-center justify-center transition-all duration-300 hover:scale-110"
+                className={`fixed bottom-5 sm:bottom-6 right-5 sm:right-6 p-3.5 rounded-full shadow-xl z-50 flex items-center justify-center transition-all duration-300 hover:scale-110`}
                 style={{ background: "#25D366" }}
             >
                 <FaWhatsapp size={26} className="text-white" />

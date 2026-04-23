@@ -133,7 +133,7 @@ const Services: React.FC = () => {
 
     return (
         <section
-            id="web-services"
+            id="services"
             className="relative py-24 overflow-hidden"
             style={{ background: "#020617" }}
         >
@@ -153,7 +153,7 @@ const Services: React.FC = () => {
 
             <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
-                <div className={`mb-16 ${isRTL ? "text-right" : "text-center"}`}>
+                <div className="mb-16 text-center">
                     <span
                         className="inline-block text-xs font-bold tracking-[0.18em] uppercase px-4 py-1.5 rounded-full mb-4"
                         style={{

@@ -6,7 +6,7 @@ import { ShieldCheck, Rocket, HeartHandshake, Globe2, Clock, Star, ChevronLeft, 
 import { motion, useMotionValue, useTransform, animate, useInView } from "framer-motion";
 import { useState } from "react";
 
-const icons = [ShieldCheck, Rocket, HeartHandshake, Globe2, Clock, Star];
+const icons = [ShieldCheck, Rocket, HeartHandshake, Clock, Star];
 
 // Hero palette: #020617 (dark), accents: #13FFAA, #1E67C6, #CE84CF, #DD335C
 const accentColors = [
@@ -119,14 +119,12 @@ const reasons = [
     { titleKey: "items.quality.title", descKey: "items.quality.description" },
     { titleKey: "items.fast.title",    descKey: "items.fast.description"    },
     { titleKey: "items.support.title", descKey: "items.support.description" },
-    { titleKey: "items.global.title",  descKey: "items.global.description"  },
     { titleKey: "items.ontime.title",  descKey: "items.ontime.description"  },
     { titleKey: "items.trusted.title", descKey: "items.trusted.description" },
 ];
 
 const stats = [
     { value: "50+", labelKey: "stats.projects",     color: "#13FFAA" },
-    { value: "3",   labelKey: "stats.languages",    color: "#1E67C6" },
     { value: "98%", labelKey: "stats.satisfaction", color: "#CE84CF" },
     { value: "24h", labelKey: "stats.response",     color: "#DD335C" },
 ];
@@ -207,7 +205,7 @@ export default function WhyChooseUs() {
 
             <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
-                <div className={`mb-16 ${isRTL ? "text-right" : "text-center"}`}>
+                <div className="mb-16 text-center">
                     <span
                         className="inline-block text-xs font-bold tracking-[0.18em] uppercase px-4 py-1.5 rounded-full mb-4"
                         style={{
@@ -229,7 +227,7 @@ export default function WhyChooseUs() {
                 {/* Stats row */}
                 <div
                     ref={statsRef}
-                    className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-14 p-6 rounded-3xl"
+                    className="grid grid-cols-2 sm:grid-cols-3 gap-8 mb-14 p-8 rounded-3xl"
                     style={{
                         background: "rgba(255,255,255,0.04)",
                         border: "1px solid rgba(255,255,255,0.08)",
@@ -239,7 +237,7 @@ export default function WhyChooseUs() {
                         <div
                             key={i}
                             data-stat
-                            className={`text-center ${isRTL ? "rtl" : ""}`}
+                            className={`text-center ${isRTL ? "rtl" : ""} ${i === 2 ? "col-span-2 sm:col-span-1" : ""}`}
                             style={{
                                 opacity: 0,
                                 transform: "translateY(16px)",

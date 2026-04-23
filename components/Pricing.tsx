@@ -42,7 +42,7 @@ export default function Pricing() {
 
             <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10">
                 {/* Header */}
-                <div className={`mb-16 ${isRTL ? "text-right" : "text-center"}`}>
+                <div className="mb-16 text-center">
                     <motion.span
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}

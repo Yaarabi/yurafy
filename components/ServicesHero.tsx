@@ -1,8 +1,9 @@
 "use client";
 
-import { Globe2, ArrowRight, MessageCircle } from "lucide-react";
+import { Globe2, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { FaWhatsapp } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 import { Stars } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
@@ -48,7 +49,7 @@ export default function ServicesHero({
   return (
     <motion.section
       style={{ backgroundImage }}
-      className="relative min-h-[100vh] overflow-hidden px-6 sm:px-10 lg:px-16 text-white"
+      className="relative min-h-[70vh] md:min-h-[100vh] overflow-hidden px-6 sm:px-10 lg:px-16 text-white py-12 md:py-0"
     >
       {/* Stars background */}
       <div className="absolute inset-0 z-0">
@@ -58,10 +59,10 @@ export default function ServicesHero({
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col justify-center min-h-[100vh]">
+      <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col justify-center min-h-[70vh] md:min-h-[100vh]">
         
         {/* Top Bar — always centered */}
-        <div className="flex items-center justify-center mb-8 sm:mb-14">
+        <div className="flex items-center justify-center mb-6 sm:mb-14">
           <Link href={`/${locale}`} className="flex flex-col items-center gap-2 text-center">
             <Image
               src="/favi.png"
@@ -107,9 +108,9 @@ export default function ServicesHero({
               href="https://wa.me/+212716413605"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-3 px-10 py-5 border border-white/40 rounded-2xl font-semibold hover:bg-white/10 transition"
+              className="inline-flex items-center justify-center gap-3 px-10 py-5 border border-white/40 rounded-2xl font-semibold hover:text-white hover:bg-[#25D366] hover:border-[#25D366] transition-all duration-300"
             >
-              <MessageCircle className="w-5 h-5" />
+              <FaWhatsapp className="w-5 h-5" />
               {t("hero.ctaSecondary")}
             </a>
           </div>

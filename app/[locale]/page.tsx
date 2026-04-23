@@ -14,7 +14,6 @@ import DifferentIdea from '@/components/DifferentIdea';
 import ServicesFAQ from '@/components/ServicesFAQ';
 import Footer from '@/components/Footer';
 import FounderSection from '@/components/FounderSection';
-import SupportChat from '@/components/SupportChat';
 import ServiceForm from '@/components/ServiceForm';
 
 export default function HomePage() {
@@ -71,8 +70,7 @@ export default function HomePage() {
       {/* 11 — Footer */}
       <Footer />
 
-      {/* Floating support chat */}
-      <SupportChat />
+
 
       {/* Quote request modal */}
       <ServiceForm

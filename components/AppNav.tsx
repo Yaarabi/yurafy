@@ -12,6 +12,8 @@ import {
   FolderKanban,
   BookOpen,
   Globe2,
+  Layers,
+  HelpCircle,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from '@/i18n/navigation';
@@ -23,6 +25,12 @@ const links = (locale: string) => [
     label: { en: 'Home', fr: 'Accueil', ar: 'الرئيسية' },
     icon: Home,
     color: '#1E67C6',
+  },
+  {
+    href: `/${locale}#services`,
+    label: { en: 'Services', fr: 'Services', ar: 'الخدمات' },
+    icon: Layers,
+    color: '#F5A623',
   },
   {
     href: `/${locale}/pricing`,
@@ -38,9 +46,15 @@ const links = (locale: string) => [
   },
   {
     href: `/${locale}/blog`,
-    label: { en: 'Blog', fr: 'Blog', ar: 'المدونة' },
+    label: { en: 'Blogs', fr: 'Blogs', ar: 'المدونات' },
     icon: BookOpen,
     color: '#DD335C',
+  },
+  {
+    href: `/${locale}#cta`,
+    label: { en: 'Support', fr: 'Support', ar: 'الدعم' },
+    icon: HelpCircle,
+    color: '#13FFAA',
   },
 ];
 
@@ -79,12 +93,31 @@ export default function AppNav() {
 
   const navLinks = links(locale);
 
+  const isHome = pathname === `/${locale}` || pathname === `/${locale}/`;
+
   return (
     <div
       ref={ref}
-      className="fixed top-5 right-5 z-[9999]"
+      className="fixed top-5 right-5 z-[9999] flex items-center gap-3"
       style={isRTL ? { right: 'auto', left: '20px' } : {}}
     >
+      {/* Persistent Home Button when not on home page */}
+      {!isHome && (
+        <Link
+          href={`/${locale}`}
+          className="flex items-center justify-center w-12 h-12 rounded-2xl transition-all duration-300 hover:scale-105 active:scale-95 shadow-2xl"
+          style={{
+            background: 'rgba(255,255,255,0.08)',
+            border: '1px solid rgba(255,255,255,0.12)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+          }}
+          title={isRTL ? "الرئيسية" : "Home"}
+        >
+          <Home className="w-5 h-5 text-white/80" />
+        </Link>
+      )}
+
       {/* Trigger button */}
       <button
         onClick={() => setOpen((v) => !v)}

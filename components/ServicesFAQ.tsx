@@ -57,7 +57,7 @@ export default function ServicesFAQ({ locale }: { locale: string }) {
                 {/* Header */}
                 <div
                     ref={headerRef}
-                    className={`text-center mb-12 ${isRTL ? "text-right" : ""}`}
+                    className="text-center mb-12"
                     style={{ opacity: 0, transform: "translateY(20px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
                 >
                     <div className="flex items-center justify-center gap-3 mb-4">

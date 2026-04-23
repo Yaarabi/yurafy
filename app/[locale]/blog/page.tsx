@@ -5,11 +5,10 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ChevronLeft, ArrowRight, Calendar, Clock } from 'lucide-react';
-import LocaleSwitcher from '@/components/LocaleSwitcher';
+import ServiceForm from '@/components/ServiceForm';
 import Footer from '@/components/Footer';
 import ServicesCTA from '@/components/ServicesCTA';
 import { useState } from 'react';
-import ServiceForm from '@/components/ServiceForm';
 
 // Dummy blog data
 const blogPosts = [
@@ -75,26 +74,6 @@ export default function BlogPage() {
             <div className="fixed top-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none" />
             <div className="fixed bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-emerald-600/5 blur-[120px] rounded-full pointer-events-none" />
 
-            {/* Header */}
-            <nav className="relative z-20 w-full px-6 py-8 sm:px-10 lg:px-16 border-b border-white/5 bg-[#020617]/50 backdrop-blur-xl sticky top-0">
-                <div className="max-w-7xl mx-auto flex items-center justify-between">
-                    <Link href={`/${locale}`} className="flex items-center gap-3">
-                        <Image src="/favi.png" alt="Yurafy" width={40} height={40} />
-                        <span className="text-xl font-bold text-white">Yurafy</span>
-                    </Link>
-
-                    <div className="flex items-center gap-6">
-                        <Link
-                            href={`/${locale}`}
-                            className="hidden sm:flex items-center gap-2 text-sm font-medium text-white/60 hover:text-white transition"
-                        >
-                            {isRTL ? null : <ChevronLeft className="w-4 h-4" />}
-                            {isRTL ? "الرئيسية" : "Back Home"}
-                        </Link>
-                        <LocaleSwitcher />
-                    </div>
-                </div>
-            </nav>
 
             {/* Hero Section */}
             <section className="relative pt-20 pb-12 overflow-hidden px-6">

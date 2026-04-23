@@ -1,0 +1,30 @@
+# Yurafy - Professional Web Development Services
+
+Yurafy is a digital agency providing modern web development, UI/UX design, and digital consulting services. 
+
+## Our Expertise
+- WordPress & Custom CMS solutions
+- E-commerce Development (Shopify, YouCan, WooCommerce)
+- Custom Web Applications (MERN, Next.js, Nest.js, React, Node.js)
+- UI/UX Design and Branding
+- Performance & SEO Optimization
+- AI Agents & LLM Fine-Tuning
+- Business Workflow Automations (n8n, Zapier)
+
+## About Yurafy
+We empower businesses with high-performance, scalable digital solutions tailored to their goals. We build digital growth engines designed for speed, scalability, and high conversions.
+
+### Core Values
+1. Premium Quality Code - clean, scalable architecture built with modern best practices.
+2. Fast Delivery - efficient workflows and clear timelines.
+3. Dedicated Support - post-launch support and maintenance plans.
+4. On-Time Delivery - structured processes to deliver without delays.
+5. Trusted by Clients - long-term relationships built on transparency and measurable results.
+
+### Contact Information
+- Website: https://yurafy.com
+- WhatsApp: +212716413605
+- Locations Served: Global, with a strong focus on Morocco.
+
+## Why Choose Us?
+You work directly with Youssef Aarabi, a Full-Stack Developer and Founder of Yurafy. We don't just create basic websites; we engineer high-performance web applications, SaaS platforms, and custom digital systems focused on technical scalability.

@@ -36,6 +36,7 @@ export default function ServicesCTA({ onRequestQuote }: ServicesCTAProps) {
 
     return (
         <section
+            id="cta"
             className="relative py-20 px-4 overflow-hidden"
             style={{ background: "#020617" }}
         >
@@ -76,7 +77,7 @@ export default function ServicesCTA({ onRequestQuote }: ServicesCTAProps) {
                     <div className="absolute -bottom-16 -left-16 w-56 h-56 rounded-full pointer-events-none"
                         style={{ background: "radial-gradient(circle, rgba(19,255,170,0.1), transparent 70%)" }} />
 
-                    <div className={`relative z-10 text-white ${isRTL ? "text-right" : "text-center"}`}>
+                    <div className="relative z-10 text-white text-center">
                         {/* Badge */}
                         <div className="mb-6 flex justify-center">
                             <span
@@ -103,7 +104,7 @@ export default function ServicesCTA({ onRequestQuote }: ServicesCTAProps) {
                         </p>
 
                         {/* Buttons */}
-                        <div className={`flex flex-col sm:flex-row gap-4 justify-center ${isRTL ? "sm:flex-row-reverse" : ""}`}>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <button
                                 onClick={onRequestQuote}
                                 className="group inline-flex items-center justify-center gap-2.5 font-bold px-8 py-4 rounded-2xl text-base transition-all duration-300 hover:-translate-y-0.5"
@@ -131,15 +132,17 @@ export default function ServicesCTA({ onRequestQuote }: ServicesCTAProps) {
                                     border: "1px solid rgba(255,255,255,0.12)",
                                 }}
                                 onMouseEnter={e => {
-                                    e.currentTarget.style.borderColor = "rgba(19,255,170,0.4)";
-                                    e.currentTarget.style.color = "#13FFAA";
+                                    e.currentTarget.style.borderColor = "#25D366";
+                                    e.currentTarget.style.color = "#25D366";
+                                    e.currentTarget.style.background = "rgba(37, 211, 102, 0.1)";
                                 }}
                                 onMouseLeave={e => {
                                     e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
                                     e.currentTarget.style.color = "rgba(255,255,255,0.85)";
+                                    e.currentTarget.style.background = "rgba(255,255,255,0.05)";
                                 }}
                             >
-                                <FaWhatsapp className="w-5 h-5" style={{ color: "#13FFAA" }} />
+                                <FaWhatsapp className="w-5 h-5" style={{ color: "#25D366" }} />
                                 {t("cta.whatsapp")}
                             </a>
                         </div>

@@ -134,7 +134,6 @@
       "subtitle": "We don't just build websites — we build digital growth engines tailored to your market.",
       "stats": {
         "projects": "Projects Delivered",
-        "languages": "Languages Supported",
         "satisfaction": "Client Satisfaction",
         "response": "Avg. Response Time"
       },
@@ -150,10 +149,6 @@
         "support": {
           "title": "Dedicated Support",
           "description": "Post-launch support and maintenance plans to keep your site running perfectly."
-        },
-        "global": {
-          "title": "Multilingual Ready",
-          "description": "English, French & Arabic — we build for all of Morocco and beyond."
         },
         "ontime": {
           "title": "On-Time Delivery",
@@ -316,7 +311,7 @@
     },
     "resources": {
       "title": "Resources",
-      "resources": "Resources",
+      "resources": "Blogs",
       "blog": "Blog",
       "support": "Support",
       "terms": "Terms & Privacy",
