@@ -73,7 +73,6 @@ function StepCard({
                         className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg"
                         style={{
                             background: bg,
-                            border: `2px solid ${ring}`,
                             boxShadow: `0 0 20px ${ring}`,
                         }}
                     >
@@ -131,7 +130,6 @@ export default function ProcessSection() {
                         style={{
                             background: "rgba(30,103,198,0.15)",
                             color: "#1E67C6",
-                            border: "1px solid rgba(30,103,198,0.3)",
                         }}
                     >
                         {t("badge")}

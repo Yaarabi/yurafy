@@ -57,7 +57,6 @@ export default function DifferentIdea({ onRequest }: Props) {
                     transform: "translateY(24px)",
                     transition: "opacity 0.55s ease, transform 0.55s ease",
                     background: "rgba(255,255,255,0.04)",
-                    border: "1px solid rgba(206,132,207,0.25)",
                     boxShadow: "0 0 40px rgba(206,132,207,0.07)",
                 }}
             >
@@ -68,7 +67,6 @@ export default function DifferentIdea({ onRequest }: Props) {
                         style={{
                             background: "rgba(206,132,207,0.12)",
                             color: "#CE84CF",
-                            border: "1px solid rgba(206,132,207,0.3)",
                         }}
                     >
                         {t("differentIdea.badge")}
@@ -96,7 +94,6 @@ export default function DifferentIdea({ onRequest }: Props) {
                         style={{
                             background: "rgba(206,132,207,0.15)",
                             color: "#CE84CF",
-                            border: "1px solid rgba(206,132,207,0.35)",
                         }}
                         onMouseEnter={e => {
                             e.currentTarget.style.background = "rgba(206,132,207,0.25)"

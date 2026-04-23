@@ -93,7 +93,7 @@ export default function AppNav() {
 
   const navLinks = links(locale);
 
-  const isHome = pathname === `/${locale}` || pathname === `/${locale}/`;
+  const isHome = pathname === `/${locale}` || pathname === `/${locale}/` || pathname === '/';
 
   return (
     <div

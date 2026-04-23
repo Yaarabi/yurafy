@@ -130,7 +130,6 @@ export default function Projects({ locale, initialProjects }: { locale: string; 
                         style={{
                             background: "rgba(30,103,198,0.12)",
                             color: "#1E67C6",
-                            border: "1px solid rgba(30,103,198,0.25)",
                         }}
                     >
                         {t("projectsTitle")}
@@ -170,14 +169,11 @@ export default function Projects({ locale, initialProjects }: { locale: string; 
                                             className="group relative rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-1 w-full flex flex-col"
                                             style={{
                                                 background: "rgba(255,255,255,0.03)",
-                                                border: "1px solid rgba(255,255,255,0.07)",
                                             }}
                                             onMouseEnter={e => {
-                                                e.currentTarget.style.borderColor = hex + "50";
                                                 e.currentTarget.style.boxShadow = `0 0 32px ${rgba}`;
                                             }}
                                             onMouseLeave={e => {
-                                                e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
                                                 e.currentTarget.style.boxShadow = "none";
                                             }}
                                         >

@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { Metadata } from 'next';
 import AppNav from '@/components/AppNav';
+import { Analytics } from "@vercel/analytics/next"
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -201,6 +202,7 @@ export default async function LocaleLayout({
           {children}
         </NextIntlClientProvider>
       </div>
+      <Analytics />
     </>
   );
 }

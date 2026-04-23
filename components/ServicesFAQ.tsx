@@ -67,7 +67,6 @@ export default function ServicesFAQ({ locale }: { locale: string }) {
                             style={{
                                 background: "rgba(30,103,198,0.12)",
                                 color: "#1E67C6",
-                                border: "1px solid rgba(30,103,198,0.28)",
                             }}
                         >
                             FAQ
@@ -88,9 +87,6 @@ export default function ServicesFAQ({ locale }: { locale: string }) {
                                 className="rounded-2xl overflow-hidden transition-all duration-300"
                                 style={{
                                     background: isOpen ? "rgba(30,103,198,0.08)" : "rgba(255,255,255,0.04)",
-                                    border: isOpen
-                                        ? "1px solid rgba(30,103,198,0.35)"
-                                        : "1px solid rgba(255,255,255,0.08)",
                                 }}
                             >
                                 <button

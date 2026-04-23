@@ -45,6 +45,27 @@ export default function FounderSection({ onRequestQuote }: FounderSectionProps) 
             />
 
             <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
+                {/* Section Header */}
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6 }}
+                    className="mb-16 text-center"
+                >
+                    <span
+                        className="inline-block text-xs font-bold tracking-[0.18em] uppercase px-4 py-1.5 rounded-full mb-4"
+                        style={{
+                            background: "rgba(30,103,198,0.12)",
+                            color: "#1E67C6",
+                        }}
+                    >
+                        {t("sectionTitle")}
+                    </span>
+                    <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4 leading-tight">
+                        {t("sectionSubtitle")}
+                    </h2>
+                </motion.div>
+
                 <motion.div
                     initial="initial"
                     animate={isInView ? "animate" : "initial"}
@@ -76,7 +97,6 @@ const Block = ({ className, children, ...rest }: any) => {
             className={`col-span-4 rounded-[32px] overflow-hidden relative ${className}`}
             style={{
                 background: "rgba(255,255,255,0.02)",
-                border: "1px solid rgba(255,255,255,0.15)",
                 backdropFilter: "blur(12px)",
             }}
             {...rest}
@@ -90,7 +110,7 @@ const HeaderBlock = ({ name, role, isRTL }: { name: string; role: string; isRTL:
     <Block className="col-span-12 md:col-span-5 min-h-[300px] md:min-h-[350px] p-0 group">
         <div className="absolute inset-0 bg-gradient-to-tr from-[#1E67C6]/20 to-[#13FFAA]/20 opacity-50 transition-opacity duration-700 group-hover:opacity-100 z-10" />
         <Image 
-            src="/profile.webp"
+            src="/me.webp"
             alt={name}
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -102,8 +122,8 @@ const HeaderBlock = ({ name, role, isRTL }: { name: string; role: string; isRTL:
 );
 
 const IdentityBlock = ({ name, role, isRTL }: { name: string; role: string; isRTL: boolean }) => (
-    <Block className="col-span-12 md:col-span-5 flex flex-col items-center justify-center gap-3 p-8 group hover:bg-[rgba(255,255,255,0.04)] transition-colors">
-        <div className="p-4 rounded-full bg-[rgba(30,103,198,0.1)] border border-[rgba(30,103,198,0.2)] mb-2 group-hover:scale-110 transition-transform duration-300">
+    <Block className="col-span-12 md:col-span-5 flex flex-col items-center justify-center gap-3 p-8 group hover:bg-[rgba(255,255,255,0.04)] transition-colors order-first md:order-none">
+        <div className="p-4 rounded-full bg-[rgba(30,103,198,0.1)] mb-2 group-hover:scale-110 transition-transform duration-300">
             <Quote className={`w-6 h-6 text-[#1E67C6] ${isRTL ? "scale-x-[-1]" : ""}`} />
         </div>
         <p className="text-xl font-bold text-white text-center">{name}</p>
@@ -150,7 +170,6 @@ const AboutBlock = ({ title, bio, badge, isRTL }: { title: string; bio: string; 
                 style={{
                     background: "rgba(30,103,198,0.12)",
                     color: "#1E67C6",
-                    border: "1px solid rgba(30,103,198,0.25)",
                 }}
             >
                 {badge}
@@ -174,7 +193,7 @@ const CTABlock = ({ ctaText, isRTL }: { ctaText: string; isRTL: boolean }) => (
             href="https://wa.me/+212716413605"
             target="_blank"
             rel="noopener noreferrer"
-            className={`flex w-full md:w-auto items-center justify-between gap-4 px-8 py-5 bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] text-white rounded-2xl font-bold hover:bg-[#25D366] hover:border-[#25D366] transition-all transform shadow-xl hover:shadow-[#25D366]/20 group ${isRTL ? "flex-row-reverse" : ""}`}
+            className={`flex w-full md:w-auto items-center justify-between gap-4 px-8 py-5 bg-[rgba(255,255,255,0.05)] text-white rounded-2xl font-bold hover:bg-[#25D366] transition-all transform shadow-xl hover:shadow-[#25D366]/20 group ${isRTL ? "flex-row-reverse" : ""}`}
         >
             <span className="text-lg">{ctaText}</span>
             <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors shrink-0">

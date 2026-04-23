@@ -82,16 +82,13 @@ function ReasonCard({
                 transform: "translateY(24px)",
                 transition: `opacity 0.5s ease ${index * 0.07}s, transform 0.5s ease ${index * 0.07}s`,
                 background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(255,255,255,0.07)",
             }}
             onMouseEnter={e => {
-                e.currentTarget.style.borderColor = border;
                 e.currentTarget.style.background = bg;
                 e.currentTarget.style.boxShadow = `0 0 20px ${bg}`;
                 e.currentTarget.style.transform = "translateY(-2px)";
             }}
             onMouseLeave={e => {
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
                 e.currentTarget.style.background = "rgba(255,255,255,0.04)";
                 e.currentTarget.style.boxShadow = "none";
                 e.currentTarget.style.transform = "translateY(0)";
@@ -211,7 +208,6 @@ export default function WhyChooseUs() {
                         style={{
                             background: "rgba(19,255,170,0.1)",
                             color: "#13FFAA",
-                            border: "1px solid rgba(19,255,170,0.25)",
                         }}
                     >
                         {t("badge")}
@@ -230,7 +226,6 @@ export default function WhyChooseUs() {
                     className="grid grid-cols-2 sm:grid-cols-3 gap-8 mb-14 p-8 rounded-3xl"
                     style={{
                         background: "rgba(255,255,255,0.04)",
-                        border: "1px solid rgba(255,255,255,0.08)",
                     }}
                 >
                     {stats.map((stat, i) => (

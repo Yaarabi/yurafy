@@ -58,7 +58,6 @@ export default function ServicesCTA({ onRequestQuote }: ServicesCTAProps) {
                     className="relative px-8 sm:px-16 py-16 sm:py-20"
                     style={{
                         background: "rgba(255,255,255,0.03)",
-                        border: "1px solid rgba(30,103,198,0.35)",
                         borderRadius: "1.5rem",
                         boxShadow: "0 0 80px rgba(30,103,198,0.12), inset 0 1px 0 rgba(255,255,255,0.06)",
                     }}
@@ -85,7 +84,6 @@ export default function ServicesCTA({ onRequestQuote }: ServicesCTAProps) {
                                 style={{
                                     background: "rgba(19,255,170,0.08)",
                                     color: "#13FFAA",
-                                    border: "1px solid rgba(19,255,170,0.25)",
                                 }}
                             >
                                 <span className="w-2 h-2 rounded-full bg-[#13FFAA] animate-pulse" />
@@ -129,15 +127,12 @@ export default function ServicesCTA({ onRequestQuote }: ServicesCTAProps) {
                                 style={{
                                     background: "rgba(255,255,255,0.05)",
                                     color: "rgba(255,255,255,0.85)",
-                                    border: "1px solid rgba(255,255,255,0.12)",
                                 }}
                                 onMouseEnter={e => {
-                                    e.currentTarget.style.borderColor = "#25D366";
                                     e.currentTarget.style.color = "#25D366";
                                     e.currentTarget.style.background = "rgba(37, 211, 102, 0.1)";
                                 }}
                                 onMouseLeave={e => {
-                                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
                                     e.currentTarget.style.color = "rgba(255,255,255,0.85)";
                                     e.currentTarget.style.background = "rgba(255,255,255,0.05)";
                                 }}

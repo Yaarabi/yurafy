@@ -57,16 +57,13 @@ function ServiceCard({ service, index, isRTL }: { service: ServiceItem; index: n
                 transform: "translateY(28px)",
                 transition: `opacity 0.55s ease ${index * 0.08}s, transform 0.55s ease ${index * 0.08}s`,
                 background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.07)",
             }}
             onMouseEnter={e => {
-                e.currentTarget.style.borderColor = `${service.accent}50`;
                 e.currentTarget.style.background = service.glow;
                 e.currentTarget.style.boxShadow = `0 0 32px ${service.glow}`;
                 e.currentTarget.style.transform = "translateY(-4px)";
             }}
             onMouseLeave={e => {
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
                 e.currentTarget.style.background = "rgba(255,255,255,0.03)";
                 e.currentTarget.style.boxShadow = "none";
                 e.currentTarget.style.transform = "translateY(0)";
@@ -81,7 +78,7 @@ function ServiceCard({ service, index, isRTL }: { service: ServiceItem; index: n
             {/* Icon */}
             <div
                 className="inline-flex items-center justify-center w-11 h-11 rounded-2xl transition-transform duration-300 group-hover:scale-110"
-                style={{ background: service.glow, border: `1px solid ${service.accent}40` }}
+                style={{ background: service.glow }}
             >
                 <Icon className="w-5 h-5" style={{ color: service.accent }} />
             </div>
@@ -159,7 +156,6 @@ const Services: React.FC = () => {
                         style={{
                             background: "rgba(30,103,198,0.12)",
                             color: "#1E67C6",
-                            border: "1px solid rgba(30,103,198,0.28)",
                         }}
                     >
                         {t("web.title")}

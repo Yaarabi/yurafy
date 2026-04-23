@@ -36,8 +36,6 @@ export default function HeroTechStackLogos() {
             className="relative py-12 overflow-hidden"
             style={{
                 background: "#020617",
-                borderTop: "1px solid rgba(255,255,255,0.06)",
-                borderBottom: "1px solid rgba(255,255,255,0.06)",
             }}
         >
             {/* Label */}
@@ -76,15 +74,12 @@ export default function HeroTechStackLogos() {
                             className="flex flex-col items-center gap-3 px-4 py-4 rounded-2xl transition-all duration-300 group-hover:-translate-y-1"
                             style={{
                                 background: "rgba(255,255,255,0.04)",
-                                border: "1px solid rgba(255,255,255,0.07)",
                             }}
                             onMouseEnter={e => {
-                                e.currentTarget.style.borderColor = "rgba(19,255,170,0.3)";
                                 e.currentTarget.style.background = "rgba(19,255,170,0.06)";
                                 e.currentTarget.style.boxShadow = "0 0 16px rgba(19,255,170,0.08)";
                             }}
                             onMouseLeave={e => {
-                                e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
                                 e.currentTarget.style.background = "rgba(255,255,255,0.04)";
                                 e.currentTarget.style.boxShadow = "none";
                             }}
