@@ -107,7 +107,7 @@ export default function ServiceForm({ isOpen, onClose, services, initialServiceT
                 message: formData.message ? '[provided]' : '[empty]',
             });
 
-            const response = await fetch('/api/services/inquiries', {
+            const response = await fetch('https://app.yurafy.com/api/services/inquiries', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),

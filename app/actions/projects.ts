@@ -2,7 +2,7 @@
 
 export async function getProjects() {
     try {
-        const res = await fetch("https://yurafy.com/api/projects", {
+        const res = await fetch("https://app.yurafy.com/api/projects", {
             next: { revalidate: 3600 } // Cache for 1 hour
         });
         if (!res.ok) throw new Error("Failed to fetch projects");
