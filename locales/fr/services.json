@@ -210,6 +210,7 @@
       "subtitle": "Choisissez le forfait idéal pour votre entreprise. Pas de frais cachés, juste des résultats de haute qualité.",
       "currency": "DH",
       "startFrom": "À partir de",
+      "priceNotice": "Le prix peut varier en fonction de vos besoins et exigences spécifiques.",
       "cta": "Commencer",
       "plans": {
         "youcan": {
@@ -248,8 +249,8 @@
             "Pack SEO complet"
           ]
         },
-        "basic": {
-          "name": "Site Web Basique",
+        "simple": {
+          "name": "Site Web Simple",
           "price": "1000",
           "features": [
             "5 pages personnalisées",

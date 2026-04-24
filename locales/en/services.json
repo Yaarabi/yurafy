@@ -210,6 +210,7 @@
       "subtitle": "Choose the perfect package for your business. No hidden fees, just high-quality results.",
       "currency": "DH",
       "startFrom": "Starting from",
+      "priceNotice": "Price may vary based on your specific needs and requirements.",
       "cta": "Get Started",
       "plans": {
         "youcan": {
@@ -248,8 +249,8 @@
             "Complete SEO Package"
           ]
         },
-        "basic": {
-          "name": "Basic Website",
+        "simple": {
+          "name": "Simple Website",
           "price": "1000",
           "features": [
             "5 Custom Pages",
