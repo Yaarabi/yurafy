@@ -7,6 +7,7 @@ import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
 import { useTranslations } from 'next-intl';
 import toast from 'react-hot-toast';
+import { submitInquiry } from '@/app/actions/inquiries';
 
 
 interface ServiceFormProps {
@@ -107,28 +108,22 @@ export default function ServiceForm({ isOpen, onClose, services, initialServiceT
                 message: formData.message ? '[provided]' : '[empty]',
             });
 
-            const response = await fetch('https://app.yurafy.com/api/services/inquiries', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData),
-            });
+            const result = await submitInquiry(formData);
 
-            const data = await response.json();
-
-            if (!response.ok) {
+            if (!result.success) {
                 // Better error handling for API validation errors
-                const errorMessage = data.message || data.error || 'Failed to submit';
+                const errorMessage = result.error || 'Failed to submit';
                 
                 // Log server error for debugging
                 console.error('ServiceForm submission error:', {
-                    status: response.status,
-                    error: data.error,
-                    details: data.details,
+                    status: result.status,
+                    error: result.error,
+                    details: result.details,
                 });
                 
                 // If there are detailed validation errors from the API
-                if (data.details && Array.isArray(data.details)) {
-                    toast.error(data.details[0] || errorMessage);
+                if (result.details && Array.isArray(result.details)) {
+                    toast.error(result.details[0] || errorMessage);
                 } else {
                     toast.error(errorMessage);
                 }
