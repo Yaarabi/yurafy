@@ -7,10 +7,8 @@ import { getProjects } from '@/app/actions/projects';
 import { ExternalLink, ChevronLeft, LayoutPanelTop } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import Link from 'next/link';
 import ServicesCTA from '@/components/ServicesCTA';
 import Footer from '@/components/Footer';
-import SupportChat from '@/components/SupportChat';
 import ServiceForm from '@/components/ServiceForm'; 
 
 interface Project {
@@ -183,9 +181,6 @@ export default function ProjectsPage() {
 
             {/* Footer */}
             <Footer />
-
-            {/* Floating support chat */}
-            <SupportChat />
 
             {/* Quote request modal */}
             <ServiceForm
