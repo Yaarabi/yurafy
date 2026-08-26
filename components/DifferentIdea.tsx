@@ -34,7 +34,7 @@ export default function DifferentIdea({ onRequest }: Props) {
     return (
         <section
             className="relative py-12 px-4 overflow-hidden"
-            style={{ background: "#020617" }}
+            style={{ background: "transparent" }}
             aria-labelledby="different-idea-title"
         >
             {/* Dot grid */}
@@ -51,13 +51,11 @@ export default function DifferentIdea({ onRequest }: Props) {
 
             <div
                 ref={ref}
-                className={`relative z-10 max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-6 md:gap-10 p-7 md:p-10 rounded-3xl transition-all duration-300 ${isRTL ? "md:flex-row-reverse text-right" : ""}`}
+                className={`tahoe-glass-card relative z-10 max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-6 md:gap-10 p-7 md:p-10 rounded-3xl ${isRTL ? "md:flex-row-reverse text-right" : ""}`}
                 style={{
                     opacity: 0,
                     transform: "translateY(24px)",
-                    transition: "opacity 0.55s ease, transform 0.55s ease",
-                    background: "rgba(255,255,255,0.04)",
-                    boxShadow: "0 0 40px rgba(206,132,207,0.07)",
+                    transition: "opacity 0.55s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
                 }}
             >
                 {/* Badge */}
@@ -77,11 +75,11 @@ export default function DifferentIdea({ onRequest }: Props) {
                 <div className="flex-1 min-w-0">
                     <h3
                         id="different-idea-title"
-                        className="text-xl md:text-2xl font-extrabold text-white tracking-tight mb-2"
+                        className="text-xl md:text-2xl font-extrabold text-white tracking-tight mb-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
                     >
                         {t("differentIdea.title")}
                     </h3>
-                    <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
+                    <p className="text-sm sm:text-base leading-relaxed text-slate-200/90 font-medium">
                         {t("differentIdea.description")}
                     </p>
                 </div>

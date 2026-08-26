@@ -16,7 +16,7 @@ export default function FeatureCard({ icon: Icon, title, description, index }: F
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 * index }}
-            className="group relative bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300 hover:scale-105"
+            className="tahoe-glass-card group relative rounded-2xl p-6 hover:-translate-y-1.5"
         >
             {/* Icon Container */}
             <div className="mb-4 inline-flex p-3 bg-white/20 rounded-xl group-hover:bg-white/30 transition-all duration-300">

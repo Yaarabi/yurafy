@@ -21,17 +21,17 @@ export default function SupportChat() {
     useEffect(() => {
         if (!open) return;
         try {
-        const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
-        setMessages(raw ? JSON.parse(raw) : []);
+            const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
+            setMessages(raw ? JSON.parse(raw) : []);
         } catch {
-        setMessages([]);
+            setMessages([]);
         }
     }, [open]);
 
     // Persist messages to localStorage
     useEffect(() => {
         try {
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(messages));
+            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(messages));
         } catch {}
     }, [messages]);
 
@@ -48,157 +48,135 @@ export default function SupportChat() {
     // Close chat if clicked outside
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
-        if (
-            open &&
-            panelRef.current &&
-            !panelRef.current.contains(e.target as Node) &&
-            !(e.target as HTMLElement).closest("button[aria-label='Open support chat']")
-        ) {
-            setOpen(false);
-        }
+            if (
+                open &&
+                panelRef.current &&
+                !panelRef.current.contains(e.target as Node) &&
+                !(e.target as HTMLElement).closest("button[aria-label='Open support chat']")
+            ) {
+                setOpen(false);
+            }
         };
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, [open]);
 
-    async function send() {
-        const text = input.trim();
-        if (!text) return;
+    async function handleSend() {
+        if (!input.trim() || loading) return;
 
-        setInput("");
-        const userMsg: Message = { role: "user", text };
+        const userMsg: Message = { role: "user", text: input };
         setMessages((prev) => [...prev, userMsg]);
-
-        try {
+        setInput("");
         setLoading(true);
 
-        // Add bot typing placeholder
-        setMessages((prev) => {
-            const placeholder: Message = { role: "bot", text: "" };
-            const newMessages = [...prev, placeholder];
-            try { localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newMessages)); } catch {}
-            return newMessages;
-        });
-
-        // Fetch AI reply
-        const resp = await fetch("/api/support/ai-reply", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ text }),
-        });
-
-        let botText = "Sorry, no reply.";
-        if (resp.ok) {
-            const json = await resp.json();
-            botText = json?.bot?.text || json?.reply || botText;
-        }
-
-        // Replace bot placeholder with actual reply
-        setMessages((prev) => {
-            const copy = [...prev];
-            const botMsg: Message = { role: "bot", text: botText };
-            const lastBotIdx = copy.map((m) => m.role).lastIndexOf("bot");
-            if (lastBotIdx >= 0) copy[lastBotIdx] = botMsg;
-            else copy.push(botMsg);
-            try { localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(copy)); } catch {}
-            return copy;
-        });
-        } catch (err) {
-        console.error(err);
+        try {
+            const res = await fetch("/api/support", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: userMsg.text }),
+            });
+            const data = await res.json();
+            if (data?.reply) {
+                setMessages((prev) => [...prev, { role: "bot", text: data.reply }]);
+            } else {
+                setMessages((prev) => [
+                    ...prev,
+                    { role: "bot", text: t("chat.defaultError") || "Sorry, an error occurred." },
+                ]);
+            }
+        } catch {
+            setMessages((prev) => [
+                ...prev,
+                { role: "bot", text: t("chat.defaultError") || "Sorry, an error occurred." },
+            ]);
         } finally {
-        setLoading(false);
+            setLoading(false);
         }
     }
 
     return (
         <div>
-        {/* Toggle Button */}
-        <button
-            aria-label={open ? "Close support chat" : "Open support chat"}
-            aria-expanded={open}
-            aria-controls="support-chat-panel"
-            onClick={() => setOpen((o) => !o)}
-            className="fixed right-4 bottom-4 z-[99999] bg-indigo-600 hover:bg-indigo-700 text-white rounded-full p-4 sm:p-3 shadow-lg transition focus:outline-none focus:ring-2 focus:ring-indigo-300"
-        >
-            {open ? "✕" : "💬"}
-        </button>
-
-        {/* Chat Panel */}
-        {open && (
-            <div
-            ref={panelRef}
-            id="support-chat-panel"
-            role="dialog"
-            aria-label={t("chat.title") || "Support Chat"}
-            className="fixed z-[99999] bg-white  border border-gray-200  rounded-t-lg sm:rounded-lg shadow-lg flex flex-col p-3
-                inset-x-0 bottom-0 sm:inset-auto sm:right-4 sm:bottom-16 sm:w-80 md:w-96 w-full max-h-[70vh] sm:max-h-[60vh]"
+            {/* Toggle Button */}
+            <button
+                aria-label={open ? "Close support chat" : "Open support chat"}
+                aria-expanded={open}
+                aria-controls="support-chat-panel"
+                onClick={() => setOpen((o) => !o)}
+                className="fixed right-4 bottom-4 z-[99999] bg-gradient-to-b from-[#13FFAA] to-[#1E67C6] text-slate-950 rounded-full p-4 sm:p-3.5 shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none ring-2 ring-white/20"
             >
-            {/* Header */}
-            <div className="flex items-center justify-between mb-2">
-                <div className="font-semibold text-lg">{t("chat.title") || "Support Chat"}</div>
-                <button
-                aria-label="Close chat"
-                onClick={() => setOpen(false)}
-                className="text-gray-500 hover:text-gray-700 ml-2 p-1 rounded focus:outline-none focus:ring-2 focus:ring-indigo-300"
+                {open ? "✕" : "💬"}
+            </button>
+
+            {/* Chat Panel */}
+            {open && (
+                <div
+                    ref={panelRef}
+                    id="support-chat-panel"
+                    role="dialog"
+                    aria-label={t("chat.title") || "Support Chat"}
+                    className="fixed z-[99999] bg-[#020617]/95 text-white border border-white/10 backdrop-blur-2xl rounded-2xl shadow-2xl flex flex-col p-4
+                        inset-x-4 bottom-20 sm:inset-auto sm:right-4 sm:bottom-16 sm:w-84 md:w-96 max-h-[70vh] sm:max-h-[60vh]"
                 >
-                ✕
-                </button>
-            </div>
+                    {/* Header */}
+                    <div className="flex items-center justify-between pb-3 mb-2 border-b border-white/10">
+                        <div className="font-bold text-base text-white">{t("chat.title") || "Support Chat"}</div>
+                        <button
+                            aria-label="Close chat"
+                            onClick={() => setOpen(false)}
+                            className="text-white/60 hover:text-white hover:bg-white/10 p-1.5 rounded-lg transition-colors"
+                        >
+                            ✕
+                        </button>
+                    </div>
 
-            {/* Messages Area */}
-            <div
-                className="flex-1 mb-3 p-2 bg-white  rounded-lg overflow-auto flex flex-col gap-2"
-                style={{ minHeight: "40vh", maxHeight: "70vh" }}
-            >
-                {messages.map((m, i) => {
-                const isTyping = m.role === "bot" && m.text === "" && loading;
-                return (
-                    <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
-                    <div
-                        className={`inline-block px-3 py-2 rounded-md max-w-[75%] break-words ${
-                        m.role === "user"
-                            ? "bg-indigo-100 text-indigo-900"
-                            : "bg-white  text-gray-900 "
-                        }`}
-                    >
-                        {isTyping ? (
-                        <div className="flex space-x-1">
-                            <span className="w-2 h-2 bg-white0 rounded-full animate-bounce"></span>
-                            <span className="w-2 h-2 bg-white0 rounded-full animate-bounce animation-delay-200"></span>
-                            <span className="w-2 h-2 bg-white0 rounded-full animate-bounce animation-delay-400"></span>
-                        </div>
-                        ) : (
-                        m.text
+                    {/* Messages Area */}
+                    <div className="flex-1 mb-3 p-3 bg-white/5 border border-white/5 rounded-xl overflow-auto flex flex-col gap-2.5 max-h-[320px]">
+                        {messages.length === 0 && (
+                            <p className="text-xs text-white/40 text-center my-auto">
+                                {t("chat.welcome") || "How can we help you today?"}
+                            </p>
                         )}
+                        {messages.map((m, i) => (
+                            <div
+                                key={i}
+                                className={`text-xs sm:text-sm p-3 rounded-xl max-w-[85%] leading-relaxed ${
+                                    m.role === "user"
+                                        ? "bg-[#1E67C6] text-white self-end rounded-br-none"
+                                        : "bg-white/10 text-white/90 self-start rounded-bl-none border border-white/5"
+                                }`}
+                            >
+                                {m.text}
+                            </div>
+                        ))}
+                        {loading && (
+                            <div className="text-xs text-white/40 italic p-2 self-start animate-pulse">
+                                {t("chat.typing") || "Thinking..."}
+                            </div>
+                        )}
+                        <div ref={messagesEndRef} />
                     </div>
-                    </div>
-                );
-                })}
-                <div ref={messagesEndRef} />
-            </div>
 
-            {/* Input Area */}
-            <div className="flex gap-2 items-center">
-                <input
-                ref={inputRef}
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                className="flex-1 px-3 py-3 rounded-md border border-gray-300  focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                placeholder={t("chat.input.placeholder") || "Type your message..."}
-                onKeyDown={(e) => e.key === "Enter" && send()}
-                aria-label={t("chat.input.placeholder") || "Type your message"}
-                />
-                <button
-                onClick={send}
-                disabled={loading}
-                className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md transition disabled:opacity-50"
-                >
-                {loading ? "..." : t("chat.input.send") || "Send"}
-                </button>
-            </div>
-            </div>
-        )}
+                    {/* Input Area */}
+                    <div className="flex gap-2">
+                        <input
+                            ref={inputRef}
+                            type="text"
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
+                            onKeyDown={(e) => e.key === "Enter" && handleSend()}
+                            placeholder={t("chat.inputPlaceholder") || "Type your message..."}
+                            className="flex-1 bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#13FFAA]/50 focus:ring-1 focus:ring-[#13FFAA]/50 transition-all"
+                        />
+                        <button
+                            onClick={handleSend}
+                            disabled={loading || !input.trim()}
+                            className="bg-gradient-to-b from-[#13FFAA] to-[#1E67C6] text-slate-950 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl disabled:opacity-50 hover:opacity-90 transition-opacity"
+                        >
+                            {t("chat.send") || "Send"}
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
-

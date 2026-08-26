@@ -25,7 +25,7 @@ export default function FounderSection({ onRequestQuote }: FounderSectionProps) 
         <section 
             id="founder" 
             className="relative py-24 overflow-hidden" 
-            style={{ background: "#020617" }}
+            style={{ background: "transparent" }}
             dir={isRTL ? "rtl" : "ltr"}
             ref={ref}
         >
@@ -94,11 +94,7 @@ const Block = ({ className, children, ...rest }: any) => {
                 animate: { scale: 1, y: 0, opacity: 1 },
             }}
             transition={{ type: "spring", mass: 3, stiffness: 400, damping: 50 }}
-            className={`col-span-4 rounded-[32px] overflow-hidden relative ${className}`}
-            style={{
-                background: "rgba(255,255,255,0.02)",
-                backdropFilter: "blur(12px)",
-            }}
+            className={`tahoe-glass-card col-span-4 rounded-[32px] overflow-hidden relative ${className}`}
             {...rest}
         >
             {children}

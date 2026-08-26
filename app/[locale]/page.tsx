@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { Toaster } from 'react-hot-toast';
 import ServicesHero from '@/components/ServicesHero';
-import HeroTechStackLogos from '@/components/TechStack';
 import Services from '@/components/WebServices';
 import WhyChooseUs from '@/components/WhyChooseUs';
 import ProcessSection from '@/components/ProcessSection';
@@ -13,7 +12,7 @@ import ServicesCTA from '@/components/ServicesCTA';
 import DifferentIdea from '@/components/DifferentIdea';
 import ServicesFAQ from '@/components/ServicesFAQ';
 import Footer from '@/components/Footer';
-import FounderSection from '@/components/FounderSection';
+import Testimonials from '@/components/Testimonials';
 import ServiceForm from '@/components/ServiceForm';
 
 export default function HomePage() {
@@ -24,6 +23,7 @@ export default function HomePage() {
 
   const services = [
     { id: 'custom-website', type: t('customWebsite.type') },
+    { id: 'mobile-app', type: locale === 'ar' ? 'تطبيق الهاتف المحمول' : locale === 'fr' ? 'Application Mobile' : 'Mobile App Development' },
     { id: 'wordpress', type: t('wordpressWebsite.type') },
     { id: 'shopify', type: t('shopifyStore.type') },
   ];
@@ -34,14 +34,11 @@ export default function HomePage() {
   };
 
   return (
-    <main>
+    <main className="min-h-screen bg-transparent text-white">
       <Toaster position="top-center" />
 
-      {/* 1 — Hero */}
+      {/* 1 — Hero & Tech Stack */}
       <ServicesHero locale={locale} requestQuote={() => openForm()} />
-
-      {/* 2 — Tech stack marquee */}
-      <HeroTechStackLogos />
 
       {/* 3 — Our expertise / web services */}
       <Services />
@@ -55,8 +52,8 @@ export default function HomePage() {
       {/* 6 — Recent projects gallery */}
       <Projects locale={locale} />
 
-      {/* 7 — Founder Section */}
-      <FounderSection onRequestQuote={() => openForm()} />
+      {/* 7 — Client Testimonials */}
+      <Testimonials />
 
       {/* 8 — CTA banner */}
       <ServicesCTA onRequestQuote={() => openForm()} />

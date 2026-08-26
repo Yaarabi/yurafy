@@ -28,7 +28,7 @@ export default function TermsPage() {
   const isRTL = locale === 'ar';
 
   return (
-    <main className="min-h-screen flex flex-col relative" style={{ background: "#020617" }}>
+    <main className="min-h-screen flex flex-col relative" style={{ background: "transparent" }}>
       <Toaster position="top-center" />
 
       {/* Background Decorations */}

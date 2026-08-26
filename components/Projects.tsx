@@ -78,7 +78,7 @@ export default function Projects({ locale, initialProjects }: { locale: string; 
         return (
             <section
                 className="relative py-24 overflow-hidden"
-                style={{ background: "#020617" }}
+                style={{ background: "transparent" }}
                 dir={isRTL ? "rtl" : "ltr"}
             >
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -101,7 +101,7 @@ export default function Projects({ locale, initialProjects }: { locale: string; 
         <section
             id="projects"
             className="relative py-24 overflow-hidden"
-            style={{ background: "#020617" }}
+            style={{ background: "transparent" }}
             dir={isRTL ? "rtl" : "ltr"}
         >
             {/* Dot grid */}
@@ -166,16 +166,7 @@ export default function Projects({ locale, initialProjects }: { locale: string; 
                                             href={p.link}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="group relative rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-1 w-full flex flex-col"
-                                            style={{
-                                                background: "rgba(255,255,255,0.03)",
-                                            }}
-                                            onMouseEnter={e => {
-                                                e.currentTarget.style.boxShadow = `0 0 32px ${rgba}`;
-                                            }}
-                                            onMouseLeave={e => {
-                                                e.currentTarget.style.boxShadow = "none";
-                                            }}
+                                            className="tahoe-glass-card group relative rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 w-full flex flex-col"
                                         >
                                             {/* Image container */}
                                             <div className="relative h-56 overflow-hidden">
@@ -193,14 +184,11 @@ export default function Projects({ locale, initialProjects }: { locale: string; 
 
                                             {/* Content */}
                                             <div className="p-6 flex items-center justify-between gap-4 mt-auto">
-                                                <h4 className="text-base font-bold text-white truncate">
+                                                <h4 className="text-lg font-extrabold text-white truncate tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
                                                     {p.name}
                                                 </h4>
                                                 <span
-                                                    className="inline-flex items-center gap-1.5 text-xs font-bold whitespace-nowrap transition-colors duration-300"
-                                                    style={{ color: "rgba(255,255,255,0.35)" }}
-                                                    onMouseEnter={e => (e.currentTarget.style.color = hex)}
-                                                    onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.35)")}
+                                                    className="inline-flex items-center gap-1.5 text-xs font-bold whitespace-nowrap px-3.5 py-1.5 rounded-full bg-white/10 text-white/90 group-hover:bg-white/20 group-hover:text-white transition-all duration-300 shadow-sm"
                                                 >
                                                     {t("projectsView")}
                                                     <ExternalLink className="w-3.5 h-3.5" />

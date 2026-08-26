@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { motion } from "framer-motion";
 import { Check, Zap, Sparkles, Code, ShoppingCart, Globe, Bot, Cpu } from "lucide-react";
+import CurrencyModal from "@/components/CurrencyModal";
 
 interface PricingPlan {
     key: string;
@@ -25,17 +26,30 @@ const plans: PricingPlan[] = [
     { key: "aiAgent",     icon: Bot,          accent: "#DD335C", glow: "rgba(221,51,92,0.15)", priceUSD: "200", priceMAD: "2000" },
 ];
 
-export default function Pricing() {
+interface PricingProps {
+    onRequestQuote?: (serviceType?: string) => void;
+}
+
+export default function Pricing({ onRequestQuote }: PricingProps = {}) {
     const t = useTranslations("services.pricing");
     const locale = useLocale();
     const isRTL = locale === "ar";
     const [currency, setCurrency] = useState<'USD' | 'MAD'>('USD');
+    const [modalOpen, setModalOpen] = useState(false);
+
+    useEffect(() => {
+        // Automatically display popup once page is fully loaded
+        const timer = setTimeout(() => {
+            setModalOpen(true);
+        }, 400);
+        return () => clearTimeout(timer);
+    }, []);
 
     return (
         <section 
             id="pricing" 
             className="relative py-24 overflow-hidden" 
-            style={{ background: "#020617" }}
+            style={{ background: "transparent" }}
             dir={isRTL ? "rtl" : "ltr"}
         >
             {/* Background Decorations */}
@@ -69,7 +83,7 @@ export default function Pricing() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-4xl sm:text-5xl font-extrabold text-white mb-6 leading-tight"
+                        className="tahoe-glass-text text-4xl sm:text-6xl md:text-7xl font-black mb-6 leading-tight tracking-tight"
                     >
                         {t("title")}
                     </motion.h2>
@@ -112,7 +126,7 @@ export default function Pricing() {
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                     {plans.map((plan, i) => {
                         const Icon = plan.icon;
-                        const features = t.raw(`plans.${plan.key}.features`) as string[];
+                        const features = (t.raw(`plans.${plan.key}.features`) as string[]) || [];
                         const badge = t.has(`plans.${plan.key}.badge`) ? t(`plans.${plan.key}.badge`) : null;
 
                         return (
@@ -122,67 +136,70 @@ export default function Pricing() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.1 }}
-                                className="group relative flex flex-col p-8 rounded-[32px] transition-all duration-500 hover:-translate-y-2"
-                                style={{
-                                    background: "rgba(255,255,255,0.03)",
-                                }}
-                                onMouseEnter={e => {
-                                    e.currentTarget.style.background = "rgba(255,255,255,0.05)";
-                                    e.currentTarget.style.boxShadow = `0 20px 40px -15px ${plan.glow}`;
-                                }}
-                                onMouseLeave={e => {
-                                    e.currentTarget.style.background = "rgba(255,255,255,0.03)";
-                                    e.currentTarget.style.boxShadow = "none";
-                                }}
+                                className="tahoe-glass-card group relative flex flex-col p-8 rounded-[32px] hover:-translate-y-2"
                             >
                                 {/* Plan Header */}
-                                <div className="flex justify-between items-start mb-8">
+                                <div className="flex justify-between items-start mb-6">
                                     <div 
                                         className="w-14 h-14 rounded-2xl flex items-center justify-center transition-transform duration-500 group-hover:scale-110"
-                                        style={{ background: plan.glow }}
+                                        style={{ background: plan.glow, color: plan.accent }}
                                     >
-                                        <Icon className="w-7 h-7" style={{ color: plan.accent }} />
+                                        <Icon className="w-7 h-7" />
                                     </div>
                                     {badge && (
                                         <span 
-                                            className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full"
-                                            style={{ background: plan.accent, color: "#020617" }}
+                                            className="px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider"
+                                            style={{ background: plan.glow, color: plan.accent }}
                                         >
                                             {badge}
                                         </span>
                                     )}
                                 </div>
 
-                                <h3 className={`text-2xl font-bold text-white mb-2 ${isRTL ? "text-right" : "text-left"}`}>{t(`plans.${plan.key}.name`)}</h3>
-                                
-                                <div className="flex items-baseline gap-1 mb-2">
-                                    <span className="text-white/40 text-sm">{t("startFrom")}</span>
-                                    <span className="text-4xl font-black text-white px-2">
-                                        {currency === 'USD' ? plan.priceUSD : plan.priceMAD}
+                                {/* Plan Title */}
+                                <h3 className="text-2xl font-bold text-white mb-6">
+                                    {t(`plans.${plan.key}.name`)}
+                                </h3>
+
+                                {/* Price */}
+                                <div className="mb-8">
+                                    <span className="text-xs text-white/40 uppercase tracking-wider block mb-1">
+                                        {t("startFrom")}
                                     </span>
-                                    <span className="text-white/40 text-sm font-bold uppercase tracking-tighter">
-                                        {currency === 'USD' ? '$' : 'DH'}
-                                    </span>
-                                </div>
-                                <div className={`text-xs text-white/40 mb-8 italic ${isRTL ? "text-right" : "text-left"}`}>
-                                    {t("priceNotice")}
+                                    <div className="flex items-baseline gap-1 mb-2">
+                                        <span className="text-4xl sm:text-5xl font-black text-white">
+                                            {currency === 'USD' ? `$${plan.priceUSD}` : `${plan.priceMAD} DH`}
+                                        </span>
+                                    </div>
+                                    <p className="text-[11px] text-slate-400 font-medium leading-relaxed">
+                                        * {t("priceNotice")}
+                                    </p>
                                 </div>
 
                                 {/* Features */}
-                                <div className="space-y-4 mb-10 flex-grow">
-                                    {features.map((feature, idx) => (
-                                        <div key={idx} className="flex items-start gap-3">
-                                            <div className="mt-1 shrink-0 w-5 h-5 rounded-full bg-emerald-500/10 flex items-center justify-center">
-                                                <Check className="w-3 h-3 text-emerald-500" />
+                                <div className="space-y-4 mb-8 pt-6 border-t border-white/5 flex-grow">
+                                    {features.map((feature, fIndex) => (
+                                        <div key={fIndex} className="flex items-start gap-3">
+                                            <div 
+                                                className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                                                style={{ background: plan.glow, color: plan.accent }}
+                                            >
+                                                <Check className="w-3 h-3" />
                                             </div>
-                                            <span className="text-sm text-white/70 leading-relaxed">{feature}</span>
+                                            <span className="text-sm text-white/80 leading-tight">{feature}</span>
                                         </div>
                                     ))}
                                 </div>
 
                                 {/* CTA */}
                                 <button
-                                    className="w-full py-4 rounded-2xl font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2 group/btn"
+                                    onClick={() => {
+                                        const planName = t(`plans.${plan.key}.name`);
+                                        if (onRequestQuote) {
+                                            onRequestQuote(planName);
+                                        }
+                                    }}
+                                    className="w-full py-4 rounded-2xl font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2 group/btn cursor-pointer"
                                     style={{ 
                                         background: plan.isFeatured ? plan.accent : "rgba(255,255,255,0.05)",
                                         color: plan.isFeatured ? "#020617" : "white",
@@ -208,6 +225,14 @@ export default function Pricing() {
                     })}
                 </div>
             </div>
+
+            {/* Currency Choice Modal */}
+            <CurrencyModal
+                isOpen={modalOpen}
+                onClose={() => setModalOpen(false)}
+                onSelectCurrency={(selected) => setCurrency(selected)}
+                selectedCurrency={currency}
+            />
         </section>
     );
 }

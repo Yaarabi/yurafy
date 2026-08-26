@@ -8,6 +8,7 @@ interface Feature {
     titleKey: string;
     descKey: string;
     gradient: string;
+    accent: string;
 }
 
 export default function HeroFeatureCards() {
@@ -20,30 +21,34 @@ export default function HeroFeatureCards() {
             icon: ShoppingCart, 
             titleKey: 'hero.features.codCheckout.title', 
             descKey: 'hero.features.codCheckout.description',
-            gradient: 'from-blue-500 to-cyan-500'
+            gradient: 'from-blue-500/20 to-cyan-500/20',
+            accent: '#38BDF8',
         },
         { 
             icon: MessageCircle, 
             titleKey: 'hero.features.whatsappAuto.title', 
             descKey: 'hero.features.whatsappAuto.description',
-            gradient: 'from-green-500 to-emerald-500'
+            gradient: 'from-green-500/20 to-emerald-500/20',
+            accent: '#13FFAA',
         },
         { 
             icon: Truck, 
             titleKey: 'hero.features.deliveryApi.title', 
             descKey: 'hero.features.deliveryApi.description',
-            gradient: 'from-orange-500 to-amber-500'
+            gradient: 'from-orange-500/20 to-amber-500/20',
+            accent: '#F59E0B',
         },
         { 
             icon: Users, 
             titleKey: 'hero.features.teamDashboard.title', 
             descKey: 'hero.features.teamDashboard.description',
-            gradient: 'from-purple-500 to-pink-500'
+            gradient: 'from-purple-500/20 to-pink-500/20',
+            accent: '#CE84CF',
         },
     ];
 
     return (
-        <section className="overflow-hidden py-10 bg-gradient-to-b from-blue-50/50 via-white to-white   ">
+        <section className="overflow-hidden py-10 bg-[#020617]">
             <div
                 className="flex gap-5"
                 style={{
@@ -56,34 +61,31 @@ export default function HeroFeatureCards() {
                     return (
                         <div
                             key={index}
-                            className="flex-shrink-0 w-[220px] hover:scale-108 transition-transform duration-300"
+                            className="flex-shrink-0 w-[220px] hover:scale-105 transition-transform duration-300"
                         >
-                            <div className="group relative bg-white /90 backdrop-blur-sm rounded-2xl p-5 border border-gray-100  hover:border-transparent transition-all duration-300 h-full shadow-lg hover:shadow-2xl overflow-hidden">
+                            <div className="tahoe-glass-card group relative rounded-2xl p-5 h-full overflow-hidden hover:-translate-y-1">
                                 {/* Gradient overlay on hover */}
-                                <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-5 :opacity-10 transition-opacity duration-300 rounded-2xl`} />
+                                <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl`} />
                                 
                                 {/* Top accent line */}
-                                <div className={`absolute top-0 ${isRTL ? 'right-0' : 'left-0'} w-0 h-1 bg-gradient-to-r ${feature.gradient} group-hover:w-full transition-all duration-500 rounded-full`} />
+                                <div className={`absolute top-0 ${isRTL ? 'right-0' : 'left-0'} w-0 h-1 bg-gradient-to-r from-[${feature.accent}] to-transparent group-hover:w-full transition-all duration-500 rounded-full`} />
                                 
                                 <div className="relative z-10">
-                                    {/* Icon Container with gradient */}
-                                    <div className={`mb-4 inline-flex p-3 bg-gradient-to-br ${feature.gradient} rounded-xl shadow-md group-hover:shadow-lg group-hover:scale-110 transition-all duration-300`}>
-                                        <Icon className="w-6 h-6 text-white" />
+                                    {/* Icon Container */}
+                                    <div className="mb-4 inline-flex p-3 bg-white/10 rounded-xl shadow-md group-hover:scale-110 transition-all duration-300">
+                                        <Icon className="w-6 h-6 text-white" style={{ color: feature.accent }} />
                                     </div>
 
                                     {/* Title */}
-                                    <h3 className={`text-base font-bold text-gray-900  mb-2 transition-all duration-300 ${isRTL ? 'text-right' : 'text-left'}`}>
+                                    <h3 className={`text-base font-extrabold text-white mb-2 tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] transition-all duration-300 ${isRTL ? 'text-right' : 'text-left'}`}>
                                         {t(feature.titleKey)}
                                     </h3>
 
                                     {/* Description */}
-                                    <p className={`text-xs text-gray-600  leading-relaxed ${isRTL ? 'text-right' : 'text-left'}`}>
+                                    <p className={`text-xs leading-relaxed text-slate-200/90 font-medium ${isRTL ? 'text-right' : 'text-left'}`}>
                                         {t(feature.descKey)}
                                     </p>
                                 </div>
-
-                                {/* Corner decoration */}
-                                <div className={`absolute ${isRTL ? 'left-0' : 'right-0'} bottom-0 w-16 h-16 bg-gradient-to-br ${feature.gradient} opacity-5  blur-2xl group-hover:opacity-20 transition-opacity duration-300`} />
                             </div>
                         </div>
                     );
@@ -92,4 +94,3 @@ export default function HeroFeatureCards() {
         </section>
     );
 }
-

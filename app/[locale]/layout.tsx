@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { Metadata } from 'next';
 import AppNav from '@/components/AppNav';
+import GlobalBackground from '@/components/PixelBackground';
 import { Analytics } from "@vercel/analytics/next"
 
 export function generateStaticParams() {
@@ -196,10 +197,13 @@ export default async function LocaleLayout({
           __html: JSON.stringify(structuredData),
         }}
       />
-      <div style={{ fontFamily: "'Inter', sans-serif" }}>
+      <div style={{ fontFamily: "'Inter', sans-serif" }} className="bg-[#020617] text-white min-h-screen relative">
         <NextIntlClientProvider messages={messages}>
+          <GlobalBackground />
           <AppNav />
-          {children}
+          <div className="relative z-10">
+            {children}
+          </div>
         </NextIntlClientProvider>
       </div>
       <Analytics />

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X, Check, Mail, User, MessageSquare } from 'lucide-react';
 import { PhoneInput } from 'react-international-phone';
@@ -33,6 +33,12 @@ export default function ServiceForm({ isOpen, onClose, services, initialServiceT
     });
     const [errors, setErrors] = useState<Record<string, string>>({});
 
+    useEffect(() => {
+        if (initialServiceType) {
+            setFormData((prev) => ({ ...prev, serviceType: initialServiceType }));
+        }
+    }, [initialServiceType, isOpen]);
+
     const validateForm = () => {
         const newErrors: Record<string, string> = {};
 
@@ -56,9 +62,9 @@ export default function ServiceForm({ isOpen, onClose, services, initialServiceT
             newErrors.serviceType = t('form.errors.serviceType');
         }
 
-        // Validate that service type is in the available services list or 'Other'
+        // Validate that service type is in the available services list, initialServiceType, or 'Other'
         if (formData.serviceType && formData.serviceType !== 'Other') {
-            const isValidService = services.some(service => service.type === formData.serviceType);
+            const isValidService = services.some(service => service.type === formData.serviceType) || formData.serviceType === initialServiceType;
             if (!isValidService) {
                 newErrors.serviceType = `Invalid service type selected. Please choose from the dropdown.`;
             }
@@ -171,7 +177,7 @@ export default function ServiceForm({ isOpen, onClose, services, initialServiceT
                         initial={{ opacity: 0, scale: 0.95, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                        className="relative bg-[#020617] border border-white/10 rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto no-scrollbar"
+                        className="tahoe-glass-card relative rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto no-scrollbar"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <div className="sticky top-0 p-6 flex items-center justify-between z-20 bg-[#020617]/80 backdrop-blur-xl border-b border-white/5">
@@ -284,6 +290,11 @@ export default function ServiceForm({ isOpen, onClose, services, initialServiceT
                                     } rounded-xl focus:ring-2 focus:ring-[#1E67C6]/50 focus:border-[#1E67C6] outline-none text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed`}
                                 >
                                     <option value="" className="bg-[#020617]">{t('form.selectService')}</option>
+                                    {formData.serviceType && !services.some(s => s.type === formData.serviceType) && formData.serviceType !== 'Other' && (
+                                        <option value={formData.serviceType} className="bg-[#020617]">
+                                            {formData.serviceType}
+                                        </option>
+                                    )}
                                     {services.map((service) => (
                                         <option key={service.id} value={service.type} className="bg-[#020617]">
                                             {service.type}

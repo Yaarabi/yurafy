@@ -13,17 +13,17 @@ interface ServiceItem {
     glow: string;
 }
 
-// Mapped to hero palette
+// Mapped to hero palette - Web, Mobile Apps, and AI as top 3 cards
 const services: ServiceItem[] = [
-    { id: "1", key: "wordpress", icon: Globe, accent: "#1E67C6", glow: "rgba(30,103,198,0.18)" },
-    { id: "2", key: "ecommerce", icon: ShoppingBag, accent: "#13FFAA", glow: "rgba(19,255,170,0.15)" },
-    { id: "3", key: "uiux", icon: Layout, accent: "#CE84CF", glow: "rgba(206,132,207,0.15)" },
-    { id: "4", key: "responsive", icon: Smartphone, accent: "#DD335C", glow: "rgba(221,51,92,0.15)" },
-    { id: "5", key: "customWebApps", icon: Code2, accent: "#1E67C6", glow: "rgba(30,103,198,0.18)" },
-    { id: "6", key: "performanceSeo", icon: Zap, accent: "#13FFAA", glow: "rgba(19,255,170,0.15)" },
+    { id: "1", key: "customWebApps", icon: Code2, accent: "#1E67C6", glow: "rgba(30,103,198,0.18)" },
+    { id: "2", key: "mobileApps", icon: Smartphone, accent: "#13FFAA", glow: "rgba(19,255,170,0.15)" },
+    { id: "3", key: "aiAgents", icon: Bot, accent: "#CE84CF", glow: "rgba(206,132,207,0.15)" },
+    { id: "4", key: "ecommerce", icon: ShoppingBag, accent: "#DD335C", glow: "rgba(221,51,92,0.15)" },
+    { id: "5", key: "wordpress", icon: Globe, accent: "#1E67C6", glow: "rgba(30,103,198,0.18)" },
+    { id: "6", key: "uiux", icon: Layout, accent: "#13FFAA", glow: "rgba(19,255,170,0.15)" },
     { id: "7", key: "automations", icon: Cpu, accent: "#CE84CF", glow: "rgba(206,132,207,0.15)" },
-    { id: "8", key: "aiAgents", icon: Bot, accent: "#DD335C", glow: "rgba(221,51,92,0.15)" },
-    { id: "9", key: "fineTuning", icon: BrainCircuit, accent: "#1E67C6", glow: "rgba(30,103,198,0.18)" },
+    { id: "8", key: "fineTuning", icon: BrainCircuit, accent: "#DD335C", glow: "rgba(221,51,92,0.15)" },
+    { id: "9", key: "performanceSeo", icon: Zap, accent: "#38BDF8", glow: "rgba(56,189,248,0.15)" },
 ];
 
 function ServiceCard({ service, index, isRTL }: { service: ServiceItem; index: number; isRTL: boolean }) {
@@ -51,22 +51,11 @@ function ServiceCard({ service, index, isRTL }: { service: ServiceItem; index: n
     return (
         <div
             ref={ref}
-            className="group relative rounded-3xl p-7 flex flex-col items-center gap-5 cursor-default transition-all duration-300 text-center h-full w-full"
+            className="tahoe-glass-card group relative rounded-3xl p-7 flex flex-col items-center gap-5 cursor-default text-center h-full w-full hover:-translate-y-1.5"
             style={{
                 opacity: 0,
                 transform: "translateY(28px)",
-                transition: `opacity 0.55s ease ${index * 0.08}s, transform 0.55s ease ${index * 0.08}s`,
-                background: "rgba(255,255,255,0.03)",
-            }}
-            onMouseEnter={e => {
-                e.currentTarget.style.background = service.glow;
-                e.currentTarget.style.boxShadow = `0 0 32px ${service.glow}`;
-                e.currentTarget.style.transform = "translateY(-4px)";
-            }}
-            onMouseLeave={e => {
-                e.currentTarget.style.background = "rgba(255,255,255,0.03)";
-                e.currentTarget.style.boxShadow = "none";
-                e.currentTarget.style.transform = "translateY(0)";
+                transition: `opacity 0.55s ease ${index * 0.08}s, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)`,
             }}
         >
             {/* Top accent line */}
@@ -77,18 +66,21 @@ function ServiceCard({ service, index, isRTL }: { service: ServiceItem; index: n
 
             {/* Icon */}
             <div
-                className="inline-flex items-center justify-center w-11 h-11 rounded-2xl transition-transform duration-300 group-hover:scale-110"
-                style={{ background: service.glow }}
+                className="inline-flex items-center justify-center w-12 h-12 rounded-2xl transition-transform duration-300 group-hover:scale-110 shadow-lg"
+                style={{
+                    background: service.glow,
+                    border: `1px solid ${service.accent}35`,
+                }}
             >
-                <Icon className="w-5 h-5" style={{ color: service.accent }} />
+                <Icon className="w-6 h-6" style={{ color: service.accent }} />
             </div>
 
             {/* Text */}
             <div>
-                <h3 className="text-base font-bold text-white mb-2 leading-snug">
+                <h3 className="text-base sm:text-lg font-extrabold text-white mb-2 leading-snug tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
                     {t(`web.items.${service.key}.title`)}
                 </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.45)" }}>
+                <p className="text-sm leading-relaxed text-slate-200/90 font-medium">
                     {t(`web.items.${service.key}.description`)}
                 </p>
             </div>
@@ -132,7 +124,7 @@ const Services: React.FC = () => {
         <section
             id="services"
             className="relative py-24 overflow-hidden"
-            style={{ background: "#020617" }}
+            style={{ background: "transparent" }}
         >
             {/* Dot grid */}
             <div

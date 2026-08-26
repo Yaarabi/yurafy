@@ -60,36 +60,36 @@ function StepCard({
 
             <div
                 ref={ref}
-                className="relative z-10 flex flex-col items-center text-center px-4"
+                className="tahoe-glass-card relative z-10 flex flex-col items-center text-center p-6 rounded-3xl w-full max-w-[200px] hover:-translate-y-1.5"
                 style={{
                     opacity: 0,
                     transform: "translateY(28px)",
-                    transition: `opacity 0.55s ease ${index * 0.1}s, transform 0.55s ease ${index * 0.1}s`,
+                    transition: `opacity 0.55s ease ${index * 0.1}s, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)`,
                 }}
             >
                 {/* Icon circle */}
                 <div className="relative mb-5">
                     <div
-                        className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg"
+                        className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110"
                         style={{
                             background: bg,
                             boxShadow: `0 0 20px ${ring}`,
                         }}
                     >
-                        <Icon className="w-7 h-7" style={{ color }} />
+                        <Icon className="w-6 h-6" style={{ color }} />
                     </div>
                     <span
-                        className="absolute -top-1 -right-1 w-5 h-5 rounded-full text-[10px] font-bold flex items-center justify-center"
+                        className="absolute -top-2 -right-2 w-6 h-6 rounded-full text-xs font-black flex items-center justify-center shadow-md"
                         style={{ background: color, color: "#020617" }}
                     >
                         {index + 1}
                     </span>
                 </div>
 
-                <h3 className="text-sm font-bold text-white mb-2 leading-snug max-w-[130px]">
+                <h3 className="text-sm sm:text-base font-extrabold text-white mb-2 leading-snug tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
                     {t(`steps.step${index + 1}.title`)}
                 </h3>
-                <p className="text-xs leading-relaxed max-w-[140px]" style={{ color: "rgba(255,255,255,0.45)" }}>
+                <p className="text-xs sm:text-sm leading-relaxed text-slate-200/90 font-medium">
                     {t(`steps.step${index + 1}.description`)}
                 </p>
             </div>
@@ -106,7 +106,7 @@ export default function ProcessSection() {
         <section
             id="process"
             className="relative py-24 overflow-hidden"
-            style={{ background: "#020617" }}
+            style={{ background: "transparent" }}
         >
             {/* Dot grid */}
             <div

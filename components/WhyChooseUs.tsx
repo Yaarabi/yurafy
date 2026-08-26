@@ -76,35 +76,24 @@ function ReasonCard({
     return (
         <div
             ref={ref}
-            className={`group flex flex-col items-center gap-4 p-6 rounded-2xl cursor-default text-center h-full w-full`}
+            className="tahoe-glass-card group flex flex-col items-center gap-4 p-6 rounded-2xl cursor-default text-center h-full w-full hover:-translate-y-1"
             style={{
                 opacity: 0,
                 transform: "translateY(24px)",
-                transition: `opacity 0.5s ease ${index * 0.07}s, transform 0.5s ease ${index * 0.07}s`,
-                background: "rgba(255,255,255,0.04)",
-            }}
-            onMouseEnter={e => {
-                e.currentTarget.style.background = bg;
-                e.currentTarget.style.boxShadow = `0 0 20px ${bg}`;
-                e.currentTarget.style.transform = "translateY(-2px)";
-            }}
-            onMouseLeave={e => {
-                e.currentTarget.style.background = "rgba(255,255,255,0.04)";
-                e.currentTarget.style.boxShadow = "none";
-                e.currentTarget.style.transform = "translateY(0)";
+                transition: `opacity 0.5s ease ${index * 0.07}s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)`,
             }}
         >
             <div
-                className="flex-shrink-0 w-11 h-11 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
-                style={{ background: bg }}
+                className="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shadow-lg"
+                style={{ background: bg, border: `1px solid ${color}40` }}
             >
-                <Icon className="w-5 h-5" style={{ color }} />
+                <Icon className="w-6 h-6" style={{ color }} />
             </div>
             <div>
-                <h3 className="font-bold text-white text-sm mb-1">
+                <h3 className="font-extrabold text-white text-base mb-1.5 tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
                     {t(titleKey)}
                 </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.45)" }}>
+                <p className="text-sm leading-relaxed text-slate-200/90 font-medium">
                     {t(descKey)}
                 </p>
             </div>
@@ -184,7 +173,7 @@ export default function WhyChooseUs() {
         <section
             id="why-us"
             className="relative py-24 overflow-hidden"
-            style={{ background: "#020617" }}
+            style={{ background: "transparent" }}
         >
             {/* Subtle dot grid */}
             <div
@@ -223,10 +212,7 @@ export default function WhyChooseUs() {
                 {/* Stats row */}
                 <div
                     ref={statsRef}
-                    className="grid grid-cols-2 sm:grid-cols-3 gap-8 mb-14 p-8 rounded-3xl"
-                    style={{
-                        background: "rgba(255,255,255,0.04)",
-                    }}
+                    className="tahoe-glass-card grid grid-cols-2 sm:grid-cols-3 gap-8 mb-14 p-8 rounded-3xl"
                 >
                     {stats.map((stat, i) => (
                         <div
@@ -240,7 +226,7 @@ export default function WhyChooseUs() {
                             }}
                         >
                             <StatCounter value={stat.value} color={stat.color} />
-                            <p className="text-xs text-white/40 mt-1 font-medium">{t(stat.labelKey)}</p>
+                            <p className="text-sm text-slate-200/85 mt-2 font-semibold tracking-wide">{t(stat.labelKey)}</p>
                         </div>
                     ))}
                 </div>

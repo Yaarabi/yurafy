@@ -34,6 +34,14 @@
           "title": "Custom Web Applications",
           "description": "Bespoke applications built with MERN, Next.js, Nest.js, and other modern technologies tailored to your business needs."
         },
+        "mobileApps": {
+          "title": "Mobile App Development",
+          "description": "High-performance native and cross-platform mobile apps for iOS & Android built with React Native and modern frameworks."
+        },
+        "aiAgents": {
+          "title": "AI Agents & Chatbots",
+          "description": "Intelligent AI agents designed to handle customer support, sales, and complex task automation."
+        },
         "performanceSeo": {
           "title": "Performance & SEO",
           "description": "Optimized websites with fast load times, structured data, and best practices to boost search rankings and retention."
@@ -41,10 +49,6 @@
         "automations": {
           "title": "Workflow Automation",
           "description": "Streamline your business processes with custom automated workflows and API integrations."
-        },
-        "aiAgents": {
-          "title": "AI Agents & Chatbots",
-          "description": "Intelligent AI agents designed to handle customer support, sales, and complex task automation."
         },
         "fineTuning": {
           "title": "LLM Fine-Tuning",
@@ -323,7 +327,7 @@
     "contact": {
       "title": "Contact Us"
     },
-    "copyright": "© 2025 Yurafy. All rights reserved."
+    "copyright": "All rights reserved."
   },
   "Support": {
     "chat": {

@@ -16,6 +16,7 @@ export default function PricingPage() {
 
   const services = [
     { id: 'custom-website', type: t('customWebsite.type') },
+    { id: 'mobile-app', type: locale === 'ar' ? 'تطبيق الهاتف المحمول' : locale === 'fr' ? 'Application Mobile' : 'Mobile App Development' },
     { id: 'wordpress', type: t('wordpressWebsite.type') },
     { id: 'shopify', type: t('shopifyStore.type') },
   ];
@@ -26,7 +27,7 @@ export default function PricingPage() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col relative" style={{ background: "#020617" }}>
+    <main className="min-h-screen flex flex-col relative" style={{ background: "transparent" }}>
       <Toaster position="top-center" />
 
       {/* Background Decorations */}
@@ -45,7 +46,7 @@ export default function PricingPage() {
 
       {/* Pricing Section */}
       <div className="flex-grow">
-        <Pricing />
+        <Pricing onRequestQuote={(serviceType) => openForm(serviceType)} />
       </div>
 
       {/* CTA banner */}

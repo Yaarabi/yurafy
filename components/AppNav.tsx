@@ -118,46 +118,62 @@ export default function AppNav() {
         </Link>
       )}
 
-      {/* Trigger button */}
-      <button
-        onClick={() => setOpen((v) => !v)}
-        aria-label="Open app navigation"
-        className="relative flex items-center justify-center w-12 h-12 rounded-2xl transition-all duration-300 hover:scale-105 active:scale-95 shadow-2xl"
-        style={{
-          background: open
-            ? 'rgba(30,103,198,0.3)'
-            : 'rgba(255,255,255,0.08)',
-          border: open
-            ? '1px solid rgba(30,103,198,0.6)'
-            : '1px solid rgba(255,255,255,0.12)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
-        }}
-      >
-        <AnimatePresence mode="wait" initial={false}>
-          {open ? (
-            <motion.span
-              key="close"
-              initial={{ rotate: -90, opacity: 0 }}
-              animate={{ rotate: 0, opacity: 1 }}
-              exit={{ rotate: 90, opacity: 0 }}
-              transition={{ duration: 0.15 }}
-            >
-              <X className="w-5 h-5 text-white" />
-            </motion.span>
-          ) : (
-            <motion.span
-              key="grid"
-              initial={{ rotate: 90, opacity: 0 }}
-              animate={{ rotate: 0, opacity: 1 }}
-              exit={{ rotate: -90, opacity: 0 }}
-              transition={{ duration: 0.15 }}
-            >
-              <LayoutGrid className="w-5 h-5 text-white/80" />
-            </motion.span>
+      {/* Trigger button with breathing pulse animation & high visibility */}
+      <div className="relative flex items-center justify-center">
+        {/* Subtle breathing glow aura */}
+        <span className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#13FFAA]/40 via-[#1E67C6]/40 to-[#CE84CF]/40 opacity-70 blur-sm pointer-events-none animate-pulse" />
+
+        <button
+          onClick={() => setOpen((v) => !v)}
+          aria-label="Open app navigation"
+          className="relative flex items-center justify-center w-12 h-12 rounded-2xl transition-all duration-300 hover:scale-105 active:scale-95 shadow-2xl cursor-pointer"
+          style={{
+            background: open
+              ? 'rgba(30,103,198,0.45)'
+              : 'rgba(7, 14, 34, 0.88)',
+            border: open
+              ? '1px solid rgba(19,255,170,0.6)'
+              : '1px solid rgba(255,255,255,0.22)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            boxShadow: open 
+              ? '0 0 25px rgba(19,255,170,0.35)' 
+              : '0 0 20px rgba(30,103,198,0.25)',
+          }}
+        >
+          {/* Active status pulse dot */}
+          {!open && (
+            <span className="absolute top-2.5 right-2.5 flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#13FFAA] opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#13FFAA]" />
+            </span>
           )}
-        </AnimatePresence>
-      </button>
+
+          <AnimatePresence mode="wait" initial={false}>
+            {open ? (
+              <motion.span
+                key="close"
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }}
+                transition={{ duration: 0.15 }}
+              >
+                <X className="w-5 h-5 text-white" />
+              </motion.span>
+            ) : (
+              <motion.span
+                key="grid"
+                initial={{ rotate: 90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: -90, opacity: 0 }}
+                transition={{ duration: 0.15 }}
+              >
+                <LayoutGrid className="w-5 h-5 text-white" />
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </button>
+      </div>
 
       {/* Dropdown popup */}
       <AnimatePresence>

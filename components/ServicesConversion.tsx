@@ -1,8 +1,7 @@
 "use client";
 
 import { FaWhatsapp } from 'react-icons/fa';
-import { useTranslations } from 'next-intl';
-import { useLocale } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 interface ServicesConversionProps {
     onRequest: () => void;
@@ -17,45 +16,44 @@ export default function ServicesConversion({ onRequest }: ServicesConversionProp
 
     return (
         <section
-        className="max-w-5xl mx-auto px-4 mt-4 mb-16"
-        dir={isArabic ? 'rtl' : 'ltr'}
+            className="max-w-5xl mx-auto px-4 mt-4 mb-16"
+            dir={isArabic ? 'rtl' : 'ltr'}
         >
-        <div className="bg-white  rounded-3xl shadow-md border border-gray-200  p-8 sm:p-10">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-center text-gray-900 ">
-            {t('heading')}
-            </h2>
-            <p className="mt-3 text-center text-gray-600  text-sm sm:text-base max-w-2xl mx-auto">
-            {t('subtext')}
-            </p>
+            <div className="tahoe-glass-card rounded-3xl p-8 sm:p-10">
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-center text-white tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
+                    {t('heading')}
+                </h2>
+                <p className="mt-3 text-center text-slate-200/90 text-sm sm:text-base max-w-2xl mx-auto font-medium leading-relaxed">
+                    {t('subtext')}
+                </p>
 
-            <div className={`mt-8 flex flex-col sm:flex-row gap-4 ${isArabic ? 'sm:flex-row-reverse' : ''}`}>
-            <a
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={t('chatAria')}
-                className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl font-semibold px-6 py-4 text-white shadow hover:shadow-lg transition-all text-sm sm:text-base"
-                style={{ background: 'linear-gradient(90deg,#25D366,#128C7E)' }}
-            >
-                <FaWhatsapp className="w-5 h-5" />
-                {t('chatLabel')}
-            </a>
-            <button
-                onClick={onRequest}
-                className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl font-semibold px-6 py-4 text-white shadow hover:shadow-lg transition-all text-sm sm:text-base"
-                style={{ background: 'linear-gradient(to right, var(--brand-blue), #1e40af)' }}
-            >
-                {t('requestLabel')}
-            </button>
+                <div className={`mt-8 flex flex-col sm:flex-row gap-4 ${isArabic ? 'sm:flex-row-reverse' : ''}`}>
+                    <a
+                        href={whatsappHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={t('chatAria')}
+                        className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl font-bold px-6 py-4 text-white shadow-xl hover:shadow-2xl transition-all text-sm sm:text-base hover:scale-[1.02] active:scale-[0.98]"
+                        style={{ background: 'linear-gradient(90deg,#25D366,#128C7E)' }}
+                    >
+                        <FaWhatsapp className="w-5 h-5" />
+                        {t('chatLabel')}
+                    </a>
+                    <button
+                        onClick={onRequest}
+                        className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl font-bold px-6 py-4 text-slate-950 shadow-xl hover:shadow-2xl transition-all text-sm sm:text-base hover:scale-[1.02] active:scale-[0.98]"
+                        style={{ background: 'linear-gradient(to right, #13FFAA, #1E67C6)' }}
+                    >
+                        {t('requestLabel')}
+                    </button>
+                </div>
+                <p className="mt-4 text-center text-xs sm:text-sm text-slate-300/80 font-medium">
+                    {t('requestNote')}
+                </p>
+                <p className="mt-4 text-center text-slate-200/90 text-sm sm:text-base font-semibold">
+                    {t('addon')}
+                </p>
             </div>
-            <p className="mt-2 text-center text-xs sm:text-sm text-gray-500 ">
-            {t('requestNote')}
-            </p>
-            <p className="mt-6 text-center text-gray-700  text-sm sm:text-base">
-            {t('addon')}
-            </p>
-        </div>
         </section>
     );
 }
-

@@ -19,7 +19,7 @@ export default function RootLayout({
           crossOrigin=""
         />
       </head>
-      <body className={inter.className} style={{ margin: 0 }}>
+      <body className={`${inter.className} bg-[#020617] text-slate-50`} style={{ margin: 0 }}>
         {children}
       </body>
     </html>

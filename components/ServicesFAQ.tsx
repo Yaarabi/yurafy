@@ -38,7 +38,7 @@ export default function ServicesFAQ({ locale }: { locale: string }) {
         <section
             id="faq"
             className="relative py-24 overflow-hidden"
-            style={{ background: "#020617" }}
+            style={{ background: "transparent" }}
             dir={isRTL ? 'rtl' : 'ltr'}
         >
             {/* Dot grid */}
@@ -84,19 +84,18 @@ export default function ServicesFAQ({ locale }: { locale: string }) {
                         return (
                             <div
                                 key={i}
-                                className="rounded-2xl overflow-hidden transition-all duration-300"
-                                style={{
-                                    background: isOpen ? "rgba(30,103,198,0.08)" : "rgba(255,255,255,0.04)",
-                                }}
+                                className={`tahoe-glass-card rounded-2xl overflow-hidden transition-all duration-300 ${
+                                    isOpen ? "border-white/35 shadow-[inset_0_1px_2px_rgba(255,255,255,0.4),0_12px_32px_rgba(30,103,198,0.2)]" : ""
+                                }`}
                             >
                                 <button
                                     onClick={() => setOpenIndex(isOpen ? null : i)}
                                     className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
                                 >
-                                    <h3 className="text-sm font-semibold text-white leading-snug">{faq.q}</h3>
+                                    <h3 className="text-base sm:text-lg font-extrabold text-white leading-snug tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">{faq.q}</h3>
                                     <ChevronDown
                                         className={`w-5 h-5 flex-shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
-                                        style={{ color: "#1E67C6" }}
+                                        style={{ color: "#38BDF8" }}
                                     />
                                 </button>
                                 <div
@@ -106,7 +105,7 @@ export default function ServicesFAQ({ locale }: { locale: string }) {
                                         transition: "max-height 0.35s ease",
                                     }}
                                 >
-                                    <p className="px-6 pb-5 text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
+                                    <p className="px-6 pb-5 text-sm sm:text-base leading-relaxed text-slate-200/90 font-medium">
                                         {faq.a}
                                     </p>
                                 </div>
