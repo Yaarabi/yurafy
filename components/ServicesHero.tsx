@@ -265,7 +265,7 @@ export default function ServicesHero({
   }, []);
 
   return (
-    <div className="relative w-full min-h-[100dvh] bg-transparent text-white flex flex-col justify-between md:justify-center md:gap-6 py-12 md:py-0 px-4 sm:px-6 overflow-hidden select-none isolate">
+    <div className="relative w-full min-h-[100dvh] bg-transparent text-white flex flex-col justify-between items-center py-12 md:py-0 px-4 sm:px-6 overflow-hidden select-none isolate">
       <style>{`
         @keyframes marquee {
           0% { transform: translateX(0%); }
@@ -296,8 +296,8 @@ export default function ServicesHero({
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#020617_100%)] pointer-events-none opacity-80" />
       </div>
 
-      {/* Top Container: Yurafy Logo & Header */}
-      <div className="flex items-center justify-center order-1 mt-16 sm:mt-0 pointer-events-auto">
+      {/* Top Container: Yurafy Logo & Header - original mobile mt-16 untouched, pt-20 on desktop */}
+      <div className="flex items-center justify-center mt-16 md:mt-0 md:pt-20 pointer-events-auto z-10">
         <Link href={`/${currentLocale}`} className="flex flex-col items-center gap-2 text-center group">
           <Image
             src="/favi.png"
@@ -316,38 +316,96 @@ export default function ServicesHero({
         </Link>
       </div>
 
-      {/* Center Container: Tahoe Glass Title, Subtitle & Mobile Marquee */}
-      <div className="flex flex-col items-center justify-center text-center my-auto md:my-0 order-2 px-2 max-w-5xl mx-auto w-full pointer-events-none">
+      {/* Center Container: Tahoe Glass Title, Subtitle, CTA Buttons & Tech Stack */}
+      <div className="flex flex-col items-center justify-center text-center my-auto px-2 max-w-5xl mx-auto w-full z-10">
         {/* Title with Tahoe Glass effect */}
-        <h1 className="tahoe-glass-text text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight mb-5 sm:mb-6 px-1">
+        <h1 className="tahoe-glass-text text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight mb-4 sm:mb-6 px-1 pointer-events-none">
           {t("hero.title")}
         </h1>
 
         {/* Subtitle */}
-        <p className="text-sm sm:text-lg md:text-xl font-light text-white/85 max-w-3xl mx-auto px-1 leading-relaxed mb-2 sm:mb-4">
+        <p className="text-sm sm:text-lg md:text-xl font-light text-white/85 max-w-3xl mx-auto px-1 leading-relaxed mb-6 sm:mb-8 pointer-events-none">
           {t("hero.subtitle")}
         </p>
 
-        {/* Mobile Vector Marquee */}
-        <div className="block md:hidden w-full mt-8 pointer-events-auto">
-          <div className="text-[11px] uppercase tracking-wider text-white/50 font-semibold mb-4">
+        {/* CTA Buttons Row - Stacked vertically ("one on one") on mobile, row on desktop */}
+        <div
+          className={cn(
+            "pointer-events-auto flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto transition-all duration-1000 transform px-2",
+            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          )}
+          style={{ transitionDelay: "450ms" }}
+        >
+          <button
+            onClick={handlePrimaryClick}
+            className="relative inline-flex h-11 sm:h-12 w-full max-w-xs sm:w-auto items-center justify-center gap-2 rounded-xl bg-gradient-to-b from-[#13FFAA] to-[#1E67C6] px-6 sm:px-8 text-xs sm:text-sm font-semibold text-slate-950 shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),0_2px_4px_rgba(0,0,0,0.15),0_12px_24px_rgba(19,255,170,0.2)] ring-1 ring-white/20 transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] cursor-pointer whitespace-nowrap"
+          >
+            <span>{t("hero.ctaPrimary")}</span>
+            <ArrowRight className="w-4 h-4 text-slate-950 shrink-0" />
+          </button>
+
+          <a
+            href="https://wa.me/+212716413605"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={onSecondaryClick}
+            className="relative inline-flex h-11 sm:h-12 w-full max-w-xs sm:w-auto items-center justify-center gap-2 rounded-xl bg-gradient-to-b from-white/10 to-white/5 px-6 sm:px-8 text-xs sm:text-sm font-semibold text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.15),0_2px_4px_rgba(0,0,0,0.05),0_12px_24px_rgba(0,0,0,0.1)] ring-1 ring-white/15 backdrop-blur-md transition-all duration-200 hover:scale-[1.02] hover:bg-white/15 hover:border-[#25D366]/40 active:scale-[0.98] cursor-pointer whitespace-nowrap"
+          >
+            <FaWhatsapp className="w-4 h-4 text-[#25D366] shrink-0" />
+            <span>{t("hero.ctaSecondary")}</span>
+          </a>
+        </div>
+
+        {/* Tech Stack Marquee - Unified across all screens, placed directly after CTA buttons with no décalage */}
+        <div
+          className={cn(
+            "w-full max-w-5xl mt-8 sm:mt-10 md:mt-12 pointer-events-auto flex flex-col items-center justify-center gap-2.5 sm:gap-3 transition-all duration-1000 transform",
+            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          )}
+          style={{ transitionDelay: "600ms" }}
+        >
+          <span className="text-[11px] sm:text-xs uppercase tracking-wider text-white/50 font-semibold select-none">
             {t("techStack.label")}
-          </div>
+          </span>
           <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_15%,white_85%,transparent)]">
-            <div className="flex w-max gap-8 py-2 animate-marquee">
-              <div className="flex gap-8 items-center">
+            <div className="flex w-max gap-8 sm:gap-12 py-2 animate-marquee">
+              <div className="flex gap-8 sm:gap-12 items-center">
                 {TECH_STACK.map((tech, i) => (
-                  <div key={i} className="flex items-center gap-2 select-none opacity-70 hover:opacity-100 transition-opacity duration-300">
-                    <Image src={tech.logo} alt={tech.name} width={20} height={20} className="object-contain" unoptimized />
-                    <span className="text-xs font-semibold text-white/90 whitespace-nowrap">{tech.name}</span>
+                  <div
+                    key={i}
+                    className="flex items-center gap-2 sm:gap-2.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg select-none opacity-70 hover:opacity-100 hover:bg-white/5 transition-all duration-300"
+                  >
+                    <Image
+                      src={tech.logo}
+                      alt={tech.name}
+                      width={22}
+                      height={22}
+                      className="object-contain w-5 h-5 sm:w-6 sm:h-6 opacity-80"
+                      unoptimized
+                    />
+                    <span className="text-xs sm:text-sm font-semibold tracking-tight text-white/90 whitespace-nowrap">
+                      {tech.name}
+                    </span>
                   </div>
                 ))}
               </div>
-              <div className="flex gap-8 items-center" aria-hidden="true">
+              <div className="flex gap-8 sm:gap-12 items-center" aria-hidden="true">
                 {TECH_STACK.map((tech, i) => (
-                  <div key={`m-${i}`} className="flex items-center gap-2 select-none opacity-70 hover:opacity-100 transition-opacity duration-300">
-                    <Image src={tech.logo} alt={tech.name} width={20} height={20} className="object-contain" unoptimized />
-                    <span className="text-xs font-semibold text-white/90 whitespace-nowrap">{tech.name}</span>
+                  <div
+                    key={`d-${i}`}
+                    className="flex items-center gap-2 sm:gap-2.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg select-none opacity-70 hover:opacity-100 hover:bg-white/5 transition-all duration-300"
+                  >
+                    <Image
+                      src={tech.logo}
+                      alt={tech.name}
+                      width={22}
+                      height={22}
+                      className="object-contain w-5 h-5 sm:w-6 sm:h-6 opacity-80"
+                      unoptimized
+                    />
+                    <span className="text-xs sm:text-sm font-semibold tracking-tight text-white/90 whitespace-nowrap">
+                      {tech.name}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -356,72 +414,8 @@ export default function ServicesHero({
         </div>
       </div>
 
-      {/* Bottom Container: CTA Row */}
-      <div
-        className={cn(
-          "pointer-events-auto flex flex-row items-center justify-center gap-4 mt-6 md:mt-8 mb-4 md:mb-0 order-4 md:order-3 transition-all duration-1000 transform px-1",
-          isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-        )}
-        style={{ transitionDelay: "450ms" }}
-      >
-        <button
-          onClick={handlePrimaryClick}
-          className="relative inline-flex h-11 sm:h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-b from-[#13FFAA] to-[#1E67C6] px-6 sm:px-8 text-xs sm:text-sm font-semibold text-slate-950 shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),0_2px_4px_rgba(0,0,0,0.15),0_12px_24px_rgba(19,255,170,0.2)] ring-1 ring-white/20 transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
-        >
-          <span>{t("hero.ctaPrimary")}</span>
-          <ArrowRight className="w-4 h-4 text-slate-950" />
-        </button>
-
-        <a
-          href="https://wa.me/+212716413605"
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={onSecondaryClick}
-          className="relative inline-flex h-11 sm:h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-b from-white/10 to-white/5 px-6 sm:px-8 text-xs sm:text-sm font-semibold text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.15),0_2px_4px_rgba(0,0,0,0.05),0_12px_24px_rgba(0,0,0,0.1)] ring-1 ring-white/15 backdrop-blur-md transition-all duration-200 hover:scale-[1.02] hover:bg-white/15 hover:border-[#25D366]/40 active:scale-[0.98] cursor-pointer"
-        >
-          <FaWhatsapp className="w-4 h-4 text-[#25D366]" />
-          <span>{t("hero.ctaSecondary")}</span>
-        </a>
-      </div>
-
-      {/* Desktop-only Tech Stack Marquee */}
-      <div
-        className={cn(
-          "hidden md:flex absolute bottom-6 left-0 right-0 w-full z-10 pointer-events-auto flex-col items-center justify-center gap-3 transition-all duration-1000 transform order-3 md:order-4",
-          isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-        )}
-        style={{ transitionDelay: "600ms" }}
-      >
-        <span className="text-xs uppercase tracking-wider text-white/50 font-semibold select-none">
-          {t("techStack.label")}
-        </span>
-        <div className="relative w-full max-w-6xl overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_15%,white_85%,transparent)]">
-          <div className="flex w-max gap-12 py-2 animate-marquee">
-            <div className="flex gap-12 items-center">
-              {TECH_STACK.map((tech, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg select-none opacity-60 hover:opacity-100 hover:bg-white/5 transition-all duration-300"
-                >
-                  <Image src={tech.logo} alt={tech.name} width={24} height={24} className="object-contain opacity-80" unoptimized />
-                  <span className="text-xs sm:text-sm font-semibold tracking-tight text-white/90 whitespace-nowrap">{tech.name}</span>
-                </div>
-              ))}
-            </div>
-            <div className="flex gap-12 items-center" aria-hidden="true">
-              {TECH_STACK.map((tech, i) => (
-                <div
-                  key={`d-${i}`}
-                  className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg select-none opacity-60 hover:opacity-100 hover:bg-white/5 transition-all duration-300"
-                >
-                  <Image src={tech.logo} alt={tech.name} width={24} height={24} className="object-contain opacity-80" unoptimized />
-                  <span className="text-xs sm:text-sm font-semibold tracking-tight text-white/90 whitespace-nowrap">{tech.name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Bottom subtle spacer to balance top logo in justify-between */}
+      <div className="hidden md:block h-20 pointer-events-none" aria-hidden="true" />
     </div>
   );
 }
